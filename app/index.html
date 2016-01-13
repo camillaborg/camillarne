@@ -27,8 +27,13 @@
         </div>
 
        <div ng-controller="GameController">
-           <h3>{{questions[0]}}</h3>
-           
+           <h3>{{questions[0].question}}</h3>
+           <ul>
+            <li ng-repeat="option in questions[0].options">
+                <button>{{option}}</button>
+            </li>
+           </ul>
+
        </div>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main-controller.js"></script>

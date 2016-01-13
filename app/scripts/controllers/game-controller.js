@@ -1,5 +1,4 @@
-angular.module('app', [])
-    .controller('GameController', GameController);
+app.controller('GameController', GameController);
 
 function GameController($scope){
     $scope.gameID = 'A743Hd';
