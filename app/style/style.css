@@ -9,28 +9,69 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
 h1 {
-  font-size: 8em; }
+  font-size: 8em;
+  margin-top: 50px; }
 
 .highlight {
   color: #fc2768; }
 
 .players {
-  margin-top: 50px; }
+  margin-top: 50px;
+  text-align: center; }
+
+.player {
+  display: inline-block; }
 
 .circle {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   font-size: 20px;
-  line-height: 500px;
   text-align: center;
-  display: inline-block; }
+  display: inline-block;
+  margin: 0 12px;
+  position: relative; }
+  .circle img {
+    position: absolute;
+    left: -10px;
+    top: -14px; }
+
+.big-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  font-size: 20px;
+  text-align: center;
+  background: #005b7f;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  color: white;
+  -ms-transform: rotate(32deg);
+  /* IE 9 */
+  -webkit-transform: rotate(32deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(32deg); }
+  .big-circle p {
+    width: 74px;
+    padding-top: 46px;
+    padding-left: 36px; }
 
 .blue {
   background: #5674b9; }
 
+.blue-text {
+  color: #5674b9; }
+
 .pink {
   background: #FC2768; }
 
+.pink-text {
+  color: #FC2768; }
+
 .green {
-  background: #39b54a; }
+  background: #39b54a;
+  color: #39b54a; }
+
+.green-text {
+  color: #39b54a; }

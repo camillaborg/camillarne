@@ -4,24 +4,24 @@
         <title>Friend or Fraud</title>
         <link rel="stylesheet" href="style/skeleton.css" type="text/css">
         <link rel="stylesheet" href="style/style.css" type="text/css">
-        
+
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/firebase/firebase.js"></script>
         <script src="bower_components/angularfire//dist/angularfire.js"></script>
 
     </head>
     <body ng-app="app">
-       <div class="container" ng-controller="MainController">
+        <div class="big-circle blue"><p>How to Play</p></div>
+        <div class="container" ng-controller="MainController">
            <div class="row">
-               <!-- <div class="circle blue">How to Play</div> -->
                <h1>Welcome!</h1>
                <h2>This is your Game ID: <span class="highlight">{{gameID}}</span></h2>
            </div>
 
            <div class="players row">
-               <div class="two columns offset-by-one" ng-repeat="player in players">
-                   <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"></div>
-                   <p>{{player.name}}</p>
+               <div class="player" ng-repeat="player in players">
+                   <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.active" src="images/check.png"></div>
+                   <p ng-class="{'pink-text' : player.color == 'pink', 'blue-text' : player.color == 'blue', 'green-text' : player.color == 'green'}">{{player.name}}</p>
                </div>
 
            </div>
