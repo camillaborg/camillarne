@@ -6,7 +6,7 @@ function MainController($scope, CurrentGame, GameID, Mobile, FirebaseURL, $fireb
         userRef,
         authObj = $firebaseAuth(ref),
         onMobile = Mobile;
-        
+
    authObj.$authAnonymously().then(function(authData) {
       console.log("Logged in as:", authData.uid);
       userRef = ref.child(GameID).child('players').child(authData.uid);
@@ -22,14 +22,14 @@ function MainController($scope, CurrentGame, GameID, Mobile, FirebaseURL, $fireb
     $scope.players = [
         {
             name: "Emma",
-            active: true,
+            ready: true,
             score: 0,
             currentPlayer: true,
             color: "pink"
         },
         {
             name: "Camilla",
-            active: true,
+            ready: true,
             score: 0,
             currentPlayer: true,
             color: "blue"
@@ -37,7 +37,7 @@ function MainController($scope, CurrentGame, GameID, Mobile, FirebaseURL, $fireb
         },
         {
             name: "Mikaela",
-            active: false,
+            ready: false,
             score: 0,
             currentPlayer: true,
             color: "green"
