@@ -1,10 +1,11 @@
 app.controller('MainController', MainController);
 
-function MainController($scope, CurrentGame, GameID, FirebaseURL, $firebaseObject, $firebaseArray, $firebaseAuth){
+function MainController($scope, CurrentGame, GameID, Mobile, FirebaseURL, $firebaseObject, $firebaseArray, $firebaseAuth){
     $scope.gameID = GameID;
     var ref = new Firebase(FirebaseURL),
         userRef,
-        authObj = $firebaseAuth(ref);
+        authObj = $firebaseAuth(ref),
+        onMobile = Mobile;
         
    authObj.$authAnonymously().then(function(authData) {
       console.log("Logged in as:", authData.uid);
