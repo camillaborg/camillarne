@@ -1,14 +1,10 @@
 body{
     background: #eee;
     font-family: sans-serif;
+    text-align: center;
 }
 
-.container{
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 50px;
-}
+
 
 h1, h2, h3, h4, h5, h6{
     font-weight: normal;
@@ -24,3 +20,26 @@ h1{
     color: #fc2768;
 }
 
+.players{
+    margin-top:50px;
+}
+
+.circle{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    font-size:20px;
+    line-height:500px;
+    text-align:center;
+    display: inline-block;
+}
+
+.blue{
+    background: #5674b9;
+}
+.pink{
+    background:#FC2768;
+}
+.green{
+    background:#39b54a;
+}
