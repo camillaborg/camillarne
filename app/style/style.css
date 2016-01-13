@@ -37,3 +37,14 @@ h1 {
 
 .green {
   background: #39b54a; }
+
+li {
+  list-style: none; }
+  li:first-child button {
+    background-color: #39b54a; }
+  li:nth-child(2) button {
+    background-color: #00a99d; }
+  li:nth-child(3) button {
+    background-color: #f26d7d; }
+  li:nth-child(4) button {
+    background-color: #f68e56; }
