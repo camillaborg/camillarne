@@ -8,6 +8,9 @@ h1, h2, h3, h4, h5, h6 {
   color: #333;
   margin: 0; }
 
+.main {
+  padding: 50px 0; }
+
 h1 {
   font-size: 8em;
   margin-top: 50px; }
@@ -75,3 +78,14 @@ h1 {
 
 .green-text {
   color: #39b54a; }
+
+li {
+  list-style: none; }
+  li:first-child button {
+    background-color: #39b54a; }
+  li:nth-child(2) button {
+    background-color: #00a99d; }
+  li:nth-child(3) button {
+    background-color: #f26d7d; }
+  li:nth-child(4) button {
+    background-color: #f68e56; }
