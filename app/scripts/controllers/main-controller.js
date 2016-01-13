@@ -17,5 +17,30 @@ function MainController($scope, CurrentGame, GameID, FirebaseURL, $firebaseObjec
       console.error("Authentication failed:", error);
     });
   */
-  
+
+    $scope.players = [
+        {
+            name: "Emma",
+            active: false,
+            score: 0,
+            currentPlayer: true,
+            color: "pink"
+        },
+        {
+            name: "Camilla",
+            active: true,
+            score: 0,
+            currentPlayer: true,
+            color: "blue"
+
+        },
+        {
+            name: "Mikaela",
+            active: false,
+            score: 0,
+            currentPlayer: true,
+            color: "green"
+        }
+    ]
+
 }

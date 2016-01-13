@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Friend or Fraud</title>
+        <link rel="stylesheet" href="style/skeleton.css" type="text/css">
         <link rel="stylesheet" href="style/style.css" type="text/css">
         
         <script src="bower_components/angular/angular.js"></script>
@@ -11,10 +12,20 @@
     </head>
     <body ng-app="app">
        <div class="container" ng-controller="MainController">
-           <h1>Welcome!</h1>
-           <h2>This is your game ID: <span class="highlight">{{gameID}}</span></h2>
+           <div class="row">
+               <h1>Welcome!</h1>
+               <h2>This is your Game ID: <span class="highlight">{{gameID}}</span></h2>
+           </div>
+
+           <div class="players row">
+               <div class="two columns offset-by-one" ng-repeat="player in players">
+                   <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"></div>
+                   <p>{{player.name}}</p>
+               </div>
+
+           </div>
         </div>
-        
+
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main-controller.js"></script>
     </body>
