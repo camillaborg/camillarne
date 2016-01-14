@@ -37,7 +37,8 @@
 
 
        <div ng-controller="GameController">
-           <h3>{{questions[0].question}}</h3>
+           <div class="circle pink"></div>
+           <h3><span class="pink-text">{{players[0].name}}!</span> {{questions[0].question}}</h3>
            <ul>
             <li ng-repeat="option in questions[0].options">
                 <button>{{option}}</button>
