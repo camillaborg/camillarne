@@ -21,7 +21,7 @@
 
            <div class="players row">
                <div class="player" ng-repeat="player in players">
-                   <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.active" src="images/check.png"></div>
+                   <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.ready" src="images/check.png"></div>
                    <p ng-class="{'pink-text' : player.color == 'pink', 'blue-text' : player.color == 'blue', 'green-text' : player.color == 'green'}">{{player.name}}</p>
                </div>
 
