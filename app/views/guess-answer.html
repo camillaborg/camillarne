@@ -1,4 +1,5 @@
 <div>
+    <div class="circle" ng-class="{'pink' : currentPlayer.color == 'pink', 'blue' : currentPlayer.color == 'blue' , 'green' : player.color == 'green'}"></div>
     <h3>{{currentQuestion.formattedQuestion}}</h3>
     <ul>
         <li ng-repeat="option in questions[0].options">
