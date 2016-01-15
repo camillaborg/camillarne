@@ -1,0 +1,23 @@
+<div class="big-circle blue"><p>How to Play</p></div>
+<div class="container main" ng-controller="MainController">
+  <div ng-if="!onMobile">
+   <div class="row">
+       <h1>Welcome!</h1>
+       <h2>This is your Game ID: <span class="highlight">{{gameID}}</span></h2>
+   </div>
+
+   <div class="players row">
+       <div class="player" ng-repeat="player in players">
+           <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.ready" src="images/check.png"></div>
+           <p ng-class="{'pink-text' : player.color == 'pink', 'blue-text' : player.color == 'blue', 'green-text' : player.color == 'green'}">{{player.name}}</p>
+       </div>
+
+   </div>
+   </div>
+   <div ng-if="onMobile">
+       <h1>Welcome</h1>
+       <p>Enter your Game ID below:</p>
+       <input type="text">
+       <button>Connect</button>
+   </div>
+</div>
