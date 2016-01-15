@@ -1,0 +1,11 @@
+<div>
+    <div class="circle" ng-class="{'pink' : currentPlayer.color == 'pink', 'blue' : currentPlayer.color == 'blue' , 'green' : player.color == 'green'}"></div>
+    <h3>And the answer was...</h3>
+    <ul>
+        <li ng-repeat="option in questions[0].options">
+            <button ng-class="{'correct' : currentPlayer.answer == option, 'wrong' : currentPlayer.answer != option}">{{option}}</button>
+            <!-- <div class="small-circle pink">{{currentPlayer.answer}}</div> -->
+        </li>
+    </ul>
+
+</div>

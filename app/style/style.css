@@ -12,6 +12,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #333;
   margin: 0; }
 
+h3 {
+  margin-bottom: 20px; }
+
+p {
+  color: #646464; }
+
 .main {
   padding: 50px 0; }
 
@@ -38,6 +44,16 @@ h1 {
     position: absolute;
     left: -10px;
     top: -14px; }
+
+.small-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 12px;
+  position: relative; }
 
 .big-circle {
   display: none;
@@ -77,8 +93,7 @@ h1 {
   color: #FC2768; }
 
 .green {
-  background: #39b54a;
-  color: #39b54a; }
+  background: #39b54a; }
 
 .green-text {
   color: #39b54a; }
@@ -90,7 +105,21 @@ h1 {
   color: #c61f1f; }
 
 li {
+  position: relative;
   list-style: none; }
+  li button {
+    position: relative; }
+  li button.wrong:after {
+    content: '\A';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    z-index: 100; }
   li:first-child button {
     background-color: #39b54a; }
   li:nth-child(2) button {
@@ -99,6 +128,10 @@ li {
     background-color: #f26d7d; }
   li:nth-child(4) button {
     background-color: #f68e56; }
+  li button {
+    width: 250px;
+    color: white;
+    font-size: 20px; }
 
 .mobile {
   font-size: 2em; }
@@ -122,4 +155,5 @@ li {
     background-color: #b01c1c;
     border: 2px solid #9a1818; }
   .ready-button p {
-    margin-top: 30%; }
+    margin-top: 30%;
+    color: white; }

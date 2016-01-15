@@ -19,6 +19,7 @@ function MainController($scope, CurrentGame, CurrentUser, Mobile, GameService){
     
     $scope.userState = 'start';
 
+  
     $scope.connectToGame = function (id){
         if(!id) {$scope.validationError = "You need to enter an ID."; return;}
         if(id.length !== 6) {$scope.validationError = "The ID must be 6 characters long."; return;}
