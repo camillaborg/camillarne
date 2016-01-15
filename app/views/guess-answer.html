@@ -1,5 +1,5 @@
 <div>
-    <h3>{{currentQuestion.formattedQuestion}}</h3>
+    <h3 >{{questions[0].partOne}}<span class="pink-text">{{currentPlayer.name}}'s</span>{{questions[0].partTwo}}</h3>
     <ul>
         <li ng-repeat="option in questions[0].options">
             <button>{{option}}</button>
