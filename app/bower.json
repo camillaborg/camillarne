@@ -20,10 +20,11 @@
     "bower_components",
     "test",
     "tests"
-],
-  "dependencies":{
+  ],
+  "devDependencies": {
+    "angular-ui-router": "~0.2.15",
     "firebase": "2.3.2",
     "angular": "1.4.8",
     "angularfire": "1.1.3"
-  }
+    }
 }
