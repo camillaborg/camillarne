@@ -31,7 +31,7 @@ function MainController($scope, CurrentGame, GameID, Mobile, FirebaseURL, $fireb
             name: "Camilla",
             ready: true,
             score: 0,
-            currentPlayer: true,
+            currentPlayer: false,
             color: "blue"
 
         },
@@ -39,7 +39,7 @@ function MainController($scope, CurrentGame, GameID, Mobile, FirebaseURL, $fireb
             name: "Mikaela",
             ready: false,
             score: 0,
-            currentPlayer: true,
+            currentPlayer: false,
             color: "green"
         }
     ]

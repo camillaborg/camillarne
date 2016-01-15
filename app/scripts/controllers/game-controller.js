@@ -14,7 +14,38 @@ function GameController($scope){
         },
 
     ]
+
+    $scope.players = [
+        {
+            name: "Emma",
+            ready: true,
+            score: 0,
+            currentPlayer: true,
+            color: "pink"
+        },
+        {
+            name: "Camilla",
+            ready: true,
+            score: 0,
+            currentPlayer: false,
+            color: "blue"
+
+        },
+        {
+            name: "Mikaela",
+            ready: false,
+            score: 0,
+            currentPlayer: false,
+            color: "green"
+        }
+    ]
+
+    $scope.currentPlayer = $scope.players[0];
+    $scope.currentPlayer.answer = $scope.questions[0].options[0];
+
+
+
+
+
+
 }
-
-
-
