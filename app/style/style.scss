@@ -1,3 +1,7 @@
+$pink: #FC2768;
+$blue: #5674b9;
+$green: #39b54a;
+
 body{
     background: #eee;
     font-family: sans-serif;
@@ -17,13 +21,8 @@ h1{
     margin-top: 50px;
 }
 
-.highlight{
-    color: #fc2768;
-}
-
 .players{
     margin-top:50px;
-    text-align:center;
 }
 
 .player{
@@ -65,28 +64,26 @@ h1{
         padding-top: 46px;
         padding-left: 36px;
     }
-
-
 }
 
 .blue{
-    background: #5674b9;
+    background: $blue;
 }
 .blue-text{
-    color: #5674b9;
+    color: $blue;
 }
 .pink{
-    background:#FC2768;
+    background:$pink;
 }
 .pink-text{
-    color:#FC2768;
+    color:$pink;
 }
 .green{
-    background:#39b54a;
-    color:#39b54a;
+    background:$green;
+    color:$green;
 }
 .green-text{
-    color:#39b54a;
+    color:$green;
 }
 
 li{

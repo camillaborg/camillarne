@@ -15,12 +15,8 @@ h1 {
   font-size: 8em;
   margin-top: 50px; }
 
-.highlight {
-  color: #fc2768; }
-
 .players {
-  margin-top: 50px;
-  text-align: center; }
+  margin-top: 50px; }
 
 .player {
   display: inline-block; }
