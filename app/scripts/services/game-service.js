@@ -1,6 +1,6 @@
 app.factory('GameService', gameService); 
 
-function gameService(CurrentGame, FirebaseURL, $firebaseObject, $firebaseArray, $firebaseAuth){
+function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $firebaseArray, $firebaseAuth){
     var ref = new Firebase(FirebaseURL),
         userRef,
         gameRef,
@@ -12,6 +12,7 @@ function gameService(CurrentGame, FirebaseURL, $firebaseObject, $firebaseArray, 
         CurrentGame.id = id;
         gameRef = ref.child(CurrentGame.id);
         gameRef.set(CurrentGame);
+        
         authObj.$authAnonymously().then(function(authData) {
           console.log("Logged in as:", authData.uid);
           gameRef.onDisconnect().remove();
@@ -30,15 +31,15 @@ function gameService(CurrentGame, FirebaseURL, $firebaseObject, $firebaseArray, 
       /* USER FUNCTIONALITY */
       registerUser: function(name){
          authObj.$authAnonymously().then(function(authData) {
-          console.log("Logged in as:", authData.uid);
-          userRef = gameRef.child('players').child(authData.uid);
-          gameRef.child('players').child(authData.uid).set({name: name, score: 0, ready: false, color: "pink"});
-          userRef.onDisconnect().remove();
-           return true;
+            var user = {name: name, score: 0, ready: false, color: "pink"};
+            console.log("Logged in as:", authData.uid);
+            userRef = gameRef.child('players').child(authData.uid);
+            gameRef.child('players').child(authData.uid).set(user);
+            CurrentUser = user;
+            userRef.onDisconnect().remove();
         }, {remember: "sessionOnly"})
          .catch(function(error) {
           console.error("Authentication failed:", error);
-           return false;
         });
       },
       setUsersTo: function(scope, varName){

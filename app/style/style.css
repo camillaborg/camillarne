@@ -1,7 +1,11 @@
 body {
   background: #eee;
   font-family: sans-serif;
-  text-align: center; }
+  text-align: center;
+  font-size: 24px; }
+  @media (max-width: 970px) {
+    body {
+      font-size: 12px; } }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
@@ -12,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 50px 0; }
 
 h1 {
-  font-size: 8em;
+  font-size: 4em;
   margin-top: 50px; }
 
 .players {
@@ -36,6 +40,7 @@ h1 {
     top: -14px; }
 
 .big-circle {
+  display: none;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -51,6 +56,9 @@ h1 {
   -webkit-transform: rotate(32deg);
   /* Chrome, Safari, Opera */
   transform: rotate(32deg); }
+  @media (min-width: 970px) {
+    .big-circle {
+      display: block; } }
   .big-circle p {
     width: 74px;
     padding-top: 46px;
@@ -75,6 +83,12 @@ h1 {
 .green-text {
   color: #39b54a; }
 
+.red {
+  background-color: #c61f1f; }
+
+.red-text {
+  color: #c61f1f; }
+
 li {
   list-style: none; }
   li:first-child button {
@@ -85,3 +99,27 @@ li {
     background-color: #f26d7d; }
   li:nth-child(4) button {
     background-color: #f68e56; }
+
+.mobile {
+  font-size: 2em; }
+  .mobile button, .mobile input {
+    width: 80%;
+    display: block;
+    margin: 10px auto; }
+
+.ready-button {
+  width: 300px;
+  height: 300px;
+  color: white;
+  background: #c61f1f;
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 100%;
+  font-size: 3em;
+  font-weight: bold;
+  border: 2px solid #b01c1c; }
+  .ready-button:active {
+    background-color: #b01c1c;
+    border: 2px solid #9a1818; }
+  .ready-button p {
+    margin-top: 30%; }

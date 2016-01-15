@@ -1,15 +1,14 @@
 app.controller('MainController', MainController);
 
-function MainController($scope, CurrentGame, Mobile, GameService){
-
+function MainController($scope, CurrentGame, CurrentUser, Mobile, GameService){
     function generateGameCode(){
       var finalCode = [],
           possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       for(var i = 0; i < 6; i++){
         finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
       }
-      //return finalCode.join('');
-      return 'A743HD';
+      return finalCode.join('');
+      //return 'A743HD';
     }  
   
     $scope.onMobile = Mobile;
@@ -21,7 +20,9 @@ function MainController($scope, CurrentGame, Mobile, GameService){
     $scope.userState = 'start';
 
     $scope.connectToGame = function (id){
-        if(!id || id.length !== 6) return;
+        if(!id) {$scope.validationError = "You need to enter an ID."; return;}
+        if(id.length !== 6) {$scope.validationError = "The ID must be 6 characters long."; return;}
+        $scope.validationError = "";
         id = id.toUpperCase();
         $scope.gameID = GameService.connectToGame(id);
         $scope.userState = 'connected';
@@ -29,36 +30,11 @@ function MainController($scope, CurrentGame, Mobile, GameService){
     }
     
     $scope.setUser = function(name){
-        if(!name) return;
+        if(!name) {$scope.validationError = "You need to enter a name."; return;}
+        $scope.validationError = "";
         GameService.registerUser(name);
         $scope.userState = 'registered';
         //fix so it only changes state and ID if actually connected, handle error case
     }
-    
-  
-    /*$scope.players = [
-        {
-            name: "Emma",
-            active: true,
-            score: 0,
-            currentPlayer: true,
-            color: "pink"
-        },
-        {
-            name: "Camilla",
-            active: true,
-            score: 0,
-            currentPlayer: true,
-            color: "blue"
 
-        },
-        {
-            name: "Mikaela",
-            active: false,
-            score: 0,
-            currentPlayer: true,
-            color: "green"
-        }
-    ]
-*/
 }

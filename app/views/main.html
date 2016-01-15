@@ -1,0 +1,35 @@
+<div class="big-circle blue"><p>How to Play</p></div>
+
+<div class="container main">
+    <div ng-if="!onMobile">
+        <div class="row">
+            <h1>Welcome!</h1>
+            <h2>This is your Game ID: <span class="pink-text">{{gameID}}</span></h2>
+        </div>
+        <div class="players row">
+            <div class="player" ng-repeat="player in players">
+                <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.ready" src="images/check.png"></div>
+                <p ng-class="{'pink-text' : player.color == 'pink', 'blue-text' : player.color == 'blue', 'green-text' : player.color == 'green'}">{{player.name}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div ng-if="onMobile" class="mobile">
+        <div ng-if="userState === 'start'">
+            <p>Enter your <span class="pink-text">Game ID</span> below:</p>
+            <input type="text" ng-model="gameID">
+            <button ng-click="connectToGame(gameID)">Connect</button>
+        </div>
+        <div ng-if="userState === 'connected'">
+            <p>Connected to <span class="pink-text">{{gameID}}</span>!</p>
+            <p>What's your name?</p>
+        <input type="text" ng-model="username">
+            <button ng-click="setUser(username)">Submit</button>
+        </div>
+        <div ng-if="userState === 'registered'">
+            <p>Welcome, {{user.name}}</p>
+            <div class="ready-button" class="red"><p>Ready</p></div>  
+        </div>
+        <p class="red-text">{{validationError}}</p>
+    </div>
+</div>

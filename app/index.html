@@ -8,53 +8,12 @@
 
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/firebase/firebase.js"></script>
-        <script src="bower_components/angularfire//dist/angularfire.js"></script>
+        <script src="bower_components/angularfire/dist/angularfire.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
     </head>
     <body ng-app="app">
-        <div class="big-circle blue"><p>How to Play</p></div>
-        <div class="container main" ng-controller="MainController">
-          <div ng-if="!onMobile">
-           <div class="row">
-               <h1>Welcome!</h1>
-               <h2>This is your Game ID: <span class="pink-text">{{gameID}}</span></h2>
-           </div>
-           <div class="players row">
-               <div class="player" ng-repeat="player in players">
-                   <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.active" src="images/check.png"></div>
-                   <p ng-class="{'pink-text' : player.color == 'pink', 'blue-text' : player.color == 'blue', 'green-text' : player.color == 'green'}">{{player.name}}</p>
-               </div>
-           </div>
-           </div>
-           <div ng-if="onMobile">
-               <div ng-if="userState === 'start'">
-                     <p>Enter your Game ID below:</p>
-                     <input type="text" ng-model="gameID">
-                 <button ng-click="connectToGame(gameID)">Connect</button>
-               </div>
-               <div ng-if="userState === 'connected'">
-                   <h1>Connected to <span class="pink-text">{{gameID}}</span></h1>
-                   <p>What's your name?</p>
-                   <input type="text" ng-model="username">
-                   <button ng-click="setUser(username)">Submit</button>
-               </div>
-               <div ng-if="userState === 'registered'">
-                   <h1>Welcome, {{user.name}}</h1>
-                   <div class="circle" class="red">Ready</div>  
-               </div>
-           </div>
-        </div>
-
-
-       <div ng-controller="GameController">
-           <h3>{{questions[0].question}}</h3>
-           <ul>
-            <li ng-repeat="option in questions[0].options">
-                <button>{{option}}</button>
-            </li>
-           </ul>
-
-       </div>
+        <div ui-view></div>
         <script src="scripts/app.js"></script>
         <script src="scripts/services/game-service.js"></script>
         <script src="scripts/controllers/main-controller.js"></script>
