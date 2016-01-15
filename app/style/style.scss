@@ -1,7 +1,20 @@
+$pink: #FC2768;
+$blue: #5674b9;
+$green: #39b54a;
+$red: #c61f1f;
+
+$mobile: 750px;
+$tablet: 970px;
+$desktop: 1170px;
+
 body{
     background: #eee;
     font-family: sans-serif;
     text-align: center;
+    font-size: 24px;
+    @media(max-width: $tablet){
+      font-size: 12px;
+    }
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -22,17 +35,12 @@ p{
 .main{padding: 50px 0;}
 
 h1{
-    font-size: 8em;
+    font-size: 4em;
     margin-top: 50px;
-}
-
-.highlight{
-    color: #fc2768;
 }
 
 .players{
     margin-top:50px;
-    text-align:center;
 }
 
 .player{
@@ -67,6 +75,8 @@ h1{
 }
 
 .big-circle{
+  @media(min-width:$tablet){display:block}
+    display: none;
     width:150px;
     height:150px;
     border-radius:50%;
@@ -85,27 +95,31 @@ h1{
         padding-top: 46px;
         padding-left: 36px;
     }
-
-
 }
 
 .blue{
-    background: #5674b9;
+    background: $blue;
 }
 .blue-text{
-    color: #5674b9;
+    color: $blue;
 }
 .pink{
-    background:#FC2768;
+    background:$pink;
 }
 .pink-text{
-    color:#FC2768;
+    color:$pink;
 }
 .green{
-    background:#39b54a;
+    background:$green;
 }
 .green-text{
-    color:#39b54a;
+    color:$green;
+}
+.red{
+  background-color:$red;
+}
+.red-text{
+  color:$red;
 }
 
 li{
@@ -144,5 +158,35 @@ li{
         color: white;
         font-size: 20px;
     }
+}
+
+.mobile{
+    font-size: 2em;
+  button, input{
+    width: 80%;
+    display: block;
+    margin: 10px auto;
+  }
+}
+
+.ready-button{
+  width: 300px;
+  height: 300px;
+  color: white;
+  background: $red;
+  border-radius :50%;
+  margin: 0 auto;
+  max-width: 100%;
+  font-size: 3em;
+  font-weight: bold;
+  border: 2px solid darken($red, 5);
+  &:active{
+    background-color: darken($red, 5);
+    border: 2px solid darken($red, 10);
+  }
+  p{
+    margin-top:30%;
+    color: white;
+  }
 }
 

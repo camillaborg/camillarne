@@ -1,7 +1,11 @@
 body {
   background: #eee;
   font-family: sans-serif;
-  text-align: center; }
+  text-align: center;
+  font-size: 24px; }
+  @media (max-width: 970px) {
+    body {
+      font-size: 12px; } }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
@@ -20,15 +24,11 @@ p {
   padding: 50px 0; }
 
 h1 {
-  font-size: 8em;
+  font-size: 4em;
   margin-top: 50px; }
 
-.highlight {
-  color: #fc2768; }
-
 .players {
-  margin-top: 50px;
-  text-align: center; }
+  margin-top: 50px; }
 
 .player {
   display: inline-block; }
@@ -58,6 +58,7 @@ h1 {
   position: relative; }
 
 .big-circle {
+  display: none;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -73,6 +74,9 @@ h1 {
   -webkit-transform: rotate(32deg);
   /* Chrome, Safari, Opera */
   transform: rotate(32deg); }
+  @media (min-width: 970px) {
+    .big-circle {
+      display: block; } }
   .big-circle p {
     width: 74px;
     padding-top: 46px;
@@ -95,6 +99,12 @@ h1 {
 
 .green-text {
   color: #39b54a; }
+
+.red {
+  background-color: #c61f1f; }
+
+.red-text {
+  color: #c61f1f; }
 
 li {
   position: relative;
@@ -124,3 +134,28 @@ li {
     width: 250px;
     color: white;
     font-size: 20px; }
+
+.mobile {
+  font-size: 2em; }
+  .mobile button, .mobile input {
+    width: 80%;
+    display: block;
+    margin: 10px auto; }
+
+.ready-button {
+  width: 300px;
+  height: 300px;
+  color: white;
+  background: #c61f1f;
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 100%;
+  font-size: 3em;
+  font-weight: bold;
+  border: 2px solid #b01c1c; }
+  .ready-button:active {
+    background-color: #b01c1c;
+    border: 2px solid #9a1818; }
+  .ready-button p {
+    margin-top: 30%;
+    color: white; }
