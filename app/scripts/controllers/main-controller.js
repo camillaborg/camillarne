@@ -8,7 +8,6 @@ function MainController($scope, CurrentGame, CurrentUser, Mobile, GameService){
         finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
       }
       return finalCode.join('');
-      //return 'A743HD';
     }  
   
     $scope.onMobile = Mobile;
@@ -18,7 +17,7 @@ function MainController($scope, CurrentGame, CurrentUser, Mobile, GameService){
     }
     
     $scope.userState = 'start';
-
+    $scope.user = CurrentUser;
   
     $scope.connectToGame = function (id){
         if(!id) {$scope.validationError = "You need to enter an ID."; return;}
@@ -34,8 +33,14 @@ function MainController($scope, CurrentGame, CurrentUser, Mobile, GameService){
         if(!name) {$scope.validationError = "You need to enter a name."; return;}
         $scope.validationError = "";
         GameService.registerUser(name);
+        $scope.user.name = name;
         $scope.userState = 'registered';
         //fix so it only changes state and ID if actually connected, handle error case
+    }
+    
+    $scope.toggleReady = function(){
+      $scope.user.ready = !$scope.user.ready;
+      GameService.toggleCurrentUserReady($scope.user.ready);
     }
 
 }

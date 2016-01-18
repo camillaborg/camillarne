@@ -1,6 +1,6 @@
 var app = angular.module('app', ['firebase', 'ui.router'])
           .value('CurrentGame', generateGame())
-          .value('CurrentUser', {})
+          .value('CurrentUser', {ready: false})
           .constant('FirebaseURL', 'https://friend-or-fraud.firebaseio.com/')
           .constant('Mobile', isMobile())
           .config(config);

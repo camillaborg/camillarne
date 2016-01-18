@@ -8,8 +8,8 @@
         </div>
         <div class="players row">
             <div class="player" ng-repeat="player in players">
-                <div class="circle" ng-class="{'pink' : player.color == 'pink', 'blue' : player.color == 'blue', 'green' : player.color == 'green'}"><img ng-show="player.ready" src="images/check.png"></div>
-                <p ng-class="{'pink-text' : player.color == 'pink', 'blue-text' : player.color == 'blue', 'green-text' : player.color == 'green'}">{{player.name}}</p>
+                <div class="circle" ng-class="player.color"><img ng-show="player.ready" src="images/check.png"></div>
+                <p ng-class="player.color + '-text'">{{player.name}}</p>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
         </div>
         <div ng-if="userState === 'registered'">
             <p>Welcome, {{user.name}}</p>
-            <div class="ready-button" class="red"><p class="unselectable">Ready</p></div>  
+            <div class="ready-button" class="red" ng-class="{'active': user.ready}" ng-click="toggleReady()"><span>Ready</span></div>  
         </div>
         <p class="red-text">{{validationError}}</p>
     </div>
