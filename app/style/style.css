@@ -57,6 +57,17 @@ h1 {
   margin: 0 12px;
   position: relative; }
 
+.answer-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 12px;
+  position: absolute;
+  top: 4px; }
+
 .big-circle {
   display: none;
   width: 150px;
@@ -124,6 +135,8 @@ li {
     transition: all 1s;
     -webkit-transition: all 1s;
     z-index: 100; }
+  li button.wrong:hover, li button.correct:hover {
+    color: white; }
   li:first-child button {
     background-color: #39b54a; }
   li:nth-child(2) button {

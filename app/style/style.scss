@@ -39,7 +39,6 @@ h1{
     margin-top: 50px;
 }
 
-
 .players{
     margin-top:50px;
 }
@@ -73,6 +72,17 @@ h1{
     display: inline-block;
     margin: 0 12px;
     position: relative;
+}
+.answer-circle{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    font-size:20px;
+    text-align:center;
+    display: inline-block;
+    margin: 0 12px;
+    position: absolute;
+    top: 4px;
 }
 
 .big-circle{
@@ -143,6 +153,10 @@ li{
         z-index: 100;
     }
 
+    button.wrong:hover, button.correct:hover{
+        color: white;
+    }
+
     &:first-child button{
        background-color: #39b54a;
     }
@@ -194,4 +208,3 @@ li{
     color: white;
   }
 }
-
