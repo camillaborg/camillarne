@@ -1,6 +1,6 @@
 <div>
-    <div class="circle" ng-class="{'pink' : currentPlayer.color == 'pink', 'blue' : currentPlayer.color == 'blue' , 'green' : player.color == 'green'}"></div>
-    <h3><span ng-class="{'pink-text' : currentPlayer.color == 'pink', 'blue-text' : currentPlayer.color == 'blue' , 'green-text' : player.color == 'green'}">{{currentPlayer.name}}!</span> {{questions[0].question}}</h3>
+    <div class="circle" ng-class="currentPlayer.color"></div>
+    <h3><span ng-class="currentPlayer.color + '-text'">{{currentPlayer.name}}!</span> What's your {{currentQuestion.question}}</h3>
     <ul>
      <li ng-repeat="option in questions[0].options">
          <button>{{option}}</button>
