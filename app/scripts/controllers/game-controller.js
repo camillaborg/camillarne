@@ -5,11 +5,13 @@ function GameController($scope){
 
     $scope.questions = [
         {
-          question: "What's your favorite animal?",
+          partOne: "What's ",
+          partTwo: " favorite animal?",
           options: ["Dog", "Monkey", "Cat", "Horse"]
         },
         {
-           question: "What's your favorite food?",
+           partOne: "What's",
+           partTwo: "favorite food?",
            options: ["Pizza", "Pasta", "Pancakes", "Pony"]
         }
 
@@ -45,8 +47,8 @@ function GameController($scope){
 
 
     // Funktion för att slice:a ut your till currentPlayer
-    function replaceWithName (question){
-        var slice = question.replace("your", $scope.currentPlayer.name + "'s");
+    /*function replaceWithName (question){
+        var slice = question.replace("your", "<span>" +   $scope.currentPlayer.name + "'s <span> ");
         return slice;
     }
 

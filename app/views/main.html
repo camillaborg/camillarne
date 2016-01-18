@@ -1,4 +1,4 @@
-<div class="big-circle blue"><p>How to Play</p></div>
+<div class="big-circle blue"><p class="unselectable">How to Play</p></div>
 
 <div class="container main">
     <div ng-if="!onMobile">
@@ -28,7 +28,7 @@
         </div>
         <div ng-if="userState === 'registered'">
             <p>Welcome, {{user.name}}</p>
-            <div class="ready-button" class="red"><p>Ready</p></div>  
+            <div class="ready-button" class="red"><p class="unselectable">Ready</p></div>  
         </div>
         <p class="red-text">{{validationError}}</p>
     </div>

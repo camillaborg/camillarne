@@ -24,6 +24,9 @@ h1, h2, h3, h4, h5, h6{
 }
 h3{
     margin-bottom: 20px;
+    .currentPlayerColor{
+        color: pink;
+    }
 }
 p{
     color: #646464;
@@ -34,6 +37,14 @@ p{
 h1{
     font-size: 4em;
     margin-top: 50px;
+}
+
+.unselectable{
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
 }
 
 .players{
@@ -88,6 +99,7 @@ h1{
     -webkit-transform: rotate(32deg); /* Chrome, Safari, Opera */
     transform: rotate(32deg);
     p{
+        color: white;
         width: 74px;
         padding-top: 46px;
         padding-left: 36px;
@@ -190,3 +202,4 @@ li{
     color: white;
   }
 }
+
