@@ -137,6 +137,10 @@ li{
         z-index: 100;
     }
 
+    button.wrong:hover, button.correct:hover{
+        color: white;
+    }
+
     &:first-child button{
        background-color: #39b54a;
     }

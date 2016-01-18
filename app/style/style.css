@@ -120,6 +120,8 @@ li {
     transition: all 1s;
     -webkit-transition: all 1s;
     z-index: 100; }
+  li button.wrong:hover, li button.correct:hover {
+    color: white; }
   li:first-child button {
     background-color: #39b54a; }
   li:nth-child(2) button {
