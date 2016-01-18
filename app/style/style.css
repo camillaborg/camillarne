@@ -25,6 +25,16 @@ h1 {
   font-size: 4em;
   margin-top: 50px; }
 
+.unselectable {
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+  -o-user-select: none;
+  user-select: none; }
+
 .players {
   margin-top: 50px; }
 
@@ -76,6 +86,7 @@ h1 {
     .big-circle {
       display: block; } }
   .big-circle p {
+    color: white;
     width: 74px;
     padding-top: 46px;
     padding-left: 36px; }

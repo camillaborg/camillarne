@@ -36,6 +36,14 @@ h1{
     margin-top: 50px;
 }
 
+.unselectable{
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+}
+
 .players{
     margin-top:50px;
 }
@@ -88,6 +96,7 @@ h1{
     -webkit-transform: rotate(32deg); /* Chrome, Safari, Opera */
     transform: rotate(32deg);
     p{
+        color: white;
         width: 74px;
         padding-top: 46px;
         padding-left: 36px;
