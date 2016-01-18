@@ -57,6 +57,17 @@ h1 {
   margin: 0 12px;
   position: relative; }
 
+.answer-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 12px;
+  position: absolute;
+  top: 4px; }
+
 .big-circle {
   display: none;
   width: 150px;
@@ -73,11 +84,13 @@ h1 {
   /* IE 9 */
   -webkit-transform: rotate(32deg);
   /* Chrome, Safari, Opera */
-  transform: rotate(32deg); }
+  transform: rotate(32deg);
+  cursor: pointer; }
   @media (min-width: 970px) {
     .big-circle {
       display: block; } }
   .big-circle p {
+    color: white;
     width: 74px;
     padding-top: 46px;
     padding-left: 36px; }
@@ -122,6 +135,8 @@ li {
     transition: all 1s;
     -webkit-transition: all 1s;
     z-index: 100; }
+  li button.wrong:hover, li button.correct:hover {
+    color: white; }
   li:first-child button {
     background-color: #39b54a; }
   li:nth-child(2) button {
@@ -143,17 +158,19 @@ li {
     margin: 10px auto; }
 
 .ready-button {
-  width: 300px;
-  height: 300px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  line-height: 0;
+  padding: 50% 0;
+  border-radius: 50%;
   color: white;
   background: #c61f1f;
-  border-radius: 50%;
-  margin: 0 auto;
-  max-width: 100%;
   font-size: 3em;
   font-weight: bold;
   border: 2px solid #b01c1c; }
-  .ready-button:active {
+  .ready-button:active, .ready-button.active {
     background-color: #b01c1c;
     border: 2px solid #9a1818; }
   .ready-button p {

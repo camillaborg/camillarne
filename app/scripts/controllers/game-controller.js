@@ -5,45 +5,69 @@ function GameController($scope){
 
     $scope.questions = [
         {
-          partOne: "What's ",
-          partTwo: " favorite animal?",
+          question: " favorite animal?",
           options: ["Dog", "Monkey", "Cat", "Horse"]
         },
         {
-           partOne: "What's",
-           partTwo: "favorite food?",
-           options: ["Pizza", "Pasta", "Pancakes", "Pony"]
+            question: "favorite food?",
+            options: ["Pizza", "Pasta", "Pancakes", "Pony"]
         }
 
     ]
 
-    $scope.players = [
-        {
+    $scope.players = {
+        A1: {
             name: "Emma",
             ready: true,
             score: 0,
             currentPlayer: true,
-            color: "pink"
+            color: "pink",
+            hasAnswered: false
         },
-        {
+        A2: {
             name: "Camilla",
             ready: true,
             score: 0,
             currentPlayer: false,
-            color: "blue"
+            color: "blue",
+            hasAnswered: true
 
         },
-        {
+        A3: {
             name: "Mikaela",
             ready: false,
             score: 0,
             currentPlayer: false,
+            color: "green",
+            hasAnswered: true
+
+        }
+        }
+
+
+    $scope.currentPlayer = $scope.players.A1;
+    $scope.currentQuestion = $scope.questions[0];
+    $scope.currentQuestion.selectedAnswer = 0;
+    $scope.currentQuestion.answers = {
+        A1: {
+            name: "Emma",
+            answer: 0,
+            color: "pink"
+        },
+        A2: {
+            name: "Camilla",
+            answer: 1,
+            color: "blue"
+        },
+        A3: {
+            name: "Mikaela",
+            answer: 2,
             color: "green"
         }
-    ]
 
-    $scope.currentPlayer = $scope.players[0];
-    $scope.currentPlayer.answer = $scope.questions[0].options[0];
+
+
+    }
 
     var count=11;
     var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
