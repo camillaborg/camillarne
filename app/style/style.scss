@@ -24,6 +24,9 @@ h1, h2, h3, h4, h5, h6{
 }
 h3{
     margin-bottom: 20px;
+    .currentPlayerColor{
+        color: pink;
+    }
 }
 p{
     color: #646464;
@@ -195,3 +198,4 @@ li{
     color: white;
   }
 }
+
