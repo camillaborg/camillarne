@@ -1,3 +1,37 @@
+/* Values from Bootstrap */
+/* Color Variables */
+/* Generate .color and .color-text for each color in the list */
+.pink {
+  background-color: #FC2768; }
+
+.pink-text {
+  color: #FC2768; }
+
+.blue {
+  background-color: #5674b9; }
+
+.blue-text {
+  color: #5674b9; }
+
+.green {
+  background-color: #39b54a; }
+
+.green-text {
+  color: #39b54a; }
+
+.red {
+  background-color: #c61f1f; }
+
+.red-text {
+  color: #c61f1f; }
+
+.orange {
+  background-color: #f68e56; }
+
+.orange-text {
+  color: #f68e56; }
+
+/* Styling */
 body {
   background: #eee;
   font-family: sans-serif;
@@ -12,20 +46,24 @@ h1, h2, h3, h4, h5, h6 {
   color: #333;
   margin: 0; }
 
+h1 {
+  font-size: 4em;
+  margin-top: 50px; }
+
 h3 {
   margin-bottom: 20px; }
   h3 .currentPlayerColor {
     color: pink; }
+
+h4 {
+  font-size: 3em;
+  margin-bottom: 10px; }
 
 p {
   color: #646464; }
 
 .main {
   padding: 50px 0; }
-
-h1 {
-  font-size: 4em;
-  margin-top: 50px; }
 
 .players {
   margin-top: 50px; }
@@ -95,30 +133,6 @@ h1 {
     padding-top: 46px;
     padding-left: 36px; }
 
-.blue {
-  background: #5674b9; }
-
-.blue-text {
-  color: #5674b9; }
-
-.pink {
-  background: #FC2768; }
-
-.pink-text {
-  color: #FC2768; }
-
-.green {
-  background: #39b54a; }
-
-.green-text {
-  color: #39b54a; }
-
-.red {
-  background-color: #c61f1f; }
-
-.red-text {
-  color: #c61f1f; }
-
 li {
   position: relative;
   list-style: none; }
@@ -178,10 +192,3 @@ li {
   .ready-button p {
     margin-top: 30%;
     color: white; }
-
-h4 {
-  font-size: 3em;
-  margin-bottom: 10px; }
-
-.timer-red {
-  color: #c61f1f; }
