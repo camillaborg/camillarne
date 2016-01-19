@@ -69,6 +69,22 @@ function GameController($scope){
 
     }
 
+    var count=11;
+    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+    function timer()
+    {
+        count=count-1;
+        if (count <= -1)
+        {
+            clearInterval(counter);
+            //counter ended, do something here
+            return;
+        }
+
+    console.log(document.getElementsByClassName('timer').innerHTML = count);
+    }
+
 
     // Funktion för att slice:a ut your till currentPlayer
     /*function replaceWithName (question){
