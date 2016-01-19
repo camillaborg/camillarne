@@ -1,6 +1,6 @@
 app.controller('GameController', GameController);
 
-function GameController($scope, $interval){
+function GameController($scope, $interval, $state){
     $scope.gameID = 'A743Hd';
 
     $scope.questions = [
@@ -79,9 +79,11 @@ function GameController($scope, $interval){
         {
             //counter ended, do something here
             $interval.cancel(counter);
+            $state.go('display-answer');
             return;
         }
     }
+
 
 
     // Funktion för att slice:a ut your till currentPlayer
