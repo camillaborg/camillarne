@@ -29,19 +29,25 @@ function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $fi
         });*/
         
         gameRef.child('players').on('value', function(snapshot){
-          var size = 0, key;
+          var update = {size: 0, inProgress: false}, key, ready = [];
           for (key in snapshot.val()) {
-              if (snapshot.val().hasOwnProperty(key)) size++;
+              if (snapshot.val().hasOwnProperty(key)) update.size++;
+              ready.push(snapshot.val()[key].ready);
           }
-          gameRef.update({numOfPlayers: size});
+          if(ready.indexOf(false) === -1) update.inProgress = true;
+          gameRef.update(update);
         });
         
         return id;
       },
       connectToGame: function(id){
+        return ref.child(id).once('value', function(snapshot) {
+          var exists = (snapshot.val() !== null);
+          if (!exists) return "That game does not exist.";
+        });
         CurrentGame.id = id;
-        gameRef = ref.child(CurrentGame.id);
-        return id;
+          gameRef = ref.child(CurrentGame.id);
+          return id;
       },
       /* USER FUNCTIONALITY */
       registerUser: function(name){

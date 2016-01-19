@@ -17,7 +17,8 @@ gulp.task('serve', function(){
         online: true
     });
 
-    gulp.watch("app/*.html").on('change', browserSync.reload);
+    gulp.watch("app/index.html").on('change', browserSync.reload);
+    gulp.watch("app/views/*.html").on('change', browserSync.reload);
 
     gulp.watch("app/style/style.scss", ['sass']);
     gulp.watch("app/style/*.css").on('change', browserSync.reload);
