@@ -1,7 +1,7 @@
 app.factory('GameService', gameService); 
 
-function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $firebaseArray, $firebaseAuth){
-    var ref = new Firebase(FirebaseURL),
+function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $firebaseArray, $firebaseAuth, $rootScope, $state){
+    var ref = new Firebase(FirebaseURL + '/Games'),
         userRef,
         gameRef,
         authObj = $firebaseAuth(ref),
@@ -16,26 +16,21 @@ function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $fi
         
         authObj.$authAnonymously().then(function(authData) {
           console.log("Logged in as:", authData.uid);
-          gameRef.onDisconnect().remove();
-
+          gameRef.onDisconnect().remove();  
         }, {remember: "sessionOnly"})
          .catch(function(error) {
           console.error("Authentication failed:", error);
         });
-        
-        /*gameRef.on('value', function(snapshot){
-          CurrentGame = snapshot.val();
-          console.log(CurrentGame);
-        });*/
-        
+                
         gameRef.child('players').on('value', function(snapshot){
           var update = {size: 0, inProgress: false}, key, ready = [];
           for (key in snapshot.val()) {
               if (snapshot.val().hasOwnProperty(key)) update.size++;
               ready.push(snapshot.val()[key].ready);
           }
-          if(ready.indexOf(false) === -1) update.inProgress = true;
+          if(ready.indexOf(false) === -1 && ready.length) update.inProgress = true;
           gameRef.update(update);
+          if(update.inProgress) $state.go('set-answer');
         });
         
         return id;
@@ -43,11 +38,17 @@ function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $fi
       connectToGame: function(id){
         return ref.child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) return "That game does not exist.";
-        });
-        CurrentGame.id = id;
+          if (!exists) { $rootScope.$broadcast('invalid_game_id'); return; }
+          
+          CurrentGame.id = id;
           gameRef = ref.child(CurrentGame.id);
-          return id;
+          $rootScope.$broadcast('connected_to_game');
+          
+          gameRef.on('value', function(snapshot){
+              CurrentGame = snapshot.val();
+              if(snapshot.val().inProgress) $state.go('set-answer');
+          });
+        });
       },
       /* USER FUNCTIONALITY */
       registerUser: function(name){
@@ -58,6 +59,7 @@ function gameService(CurrentGame, CurrentUser, FirebaseURL, $firebaseObject, $fi
             gameRef.child('players').child(authData.uid).set(user);
             CurrentUser = user;
             userRef.onDisconnect().remove();
+            $rootScope.$broadcast('user_registered');
         }, {remember: "sessionOnly"})
          .catch(function(error) {
           console.error("Authentication failed:", error);

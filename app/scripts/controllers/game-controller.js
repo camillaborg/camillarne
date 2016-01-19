@@ -1,7 +1,9 @@
 app.controller('GameController', GameController);
 
-function GameController($scope, $interval, $state){
+function GameController($scope, $interval, Mobile, $state, GameService){
     $scope.gameID = 'A743Hd';
+
+    $scope.onMobile = Mobile;
 
     $scope.questions = [
         {
@@ -84,6 +86,10 @@ function GameController($scope, $interval, $state){
         }
     }
 
+    $scope.chooseAnswer = function(answer){
+        $scope.chosenAnswer = answer;
+        console.log($scope.chosenAnswer);
+    }
 
 
     // Funktion för att slice:a ut your till currentPlayer

@@ -156,6 +156,8 @@ li {
     width: 80%;
     display: block;
     margin: 10px auto; }
+  .mobile li button {
+    width: 100%; }
 
 .ready-button {
   position: relative;
