@@ -7,6 +7,6 @@
             <button>{{option}}</button>
         </li>
     </ul>
-    <p><span ng-repeat="player in players" ng-if="player.hasAnswered">{{player.name}} {{$last ? '' : 'and '}} </span> has answered.</p>
+    <p><span ng-repeat="player in players" ng-if="player.hasAnswered">{{player.name}}{{$last ? '' : ', '}} </span> has answered.</p>
 
 </div>
