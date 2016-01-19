@@ -1,6 +1,6 @@
 app.controller('GameController', GameController);
 
-function GameController($scope){
+function GameController($scope, $interval){
     $scope.gameID = 'A743Hd';
 
     $scope.questions = [
@@ -69,20 +69,18 @@ function GameController($scope){
 
     }
 
-    var count=11;
-    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+    $scope.count=7;
+    var counter= $interval(timer, 1000); // kör varje sekund
 
     function timer()
     {
-        count=count-1;
-        if (count <= -1)
+        $scope.count=$scope.count-1;
+        if ($scope.count <= 0)
         {
-            clearInterval(counter);
             //counter ended, do something here
+            $interval.cancel(counter);
             return;
         }
-
-    console.log(document.getElementsByClassName('timer').innerHTML = count);
     }
 
 
