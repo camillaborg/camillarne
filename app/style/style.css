@@ -156,6 +156,8 @@ li {
     width: 80%;
     display: block;
     margin: 10px auto; }
+  .mobile li button {
+    width: 100%; }
 
 .ready-button {
   position: relative;
@@ -176,3 +178,10 @@ li {
   .ready-button p {
     margin-top: 30%;
     color: white; }
+
+h4 {
+  font-size: 3em;
+  margin-bottom: 10px; }
+
+.timer-red {
+  color: #c61f1f; }
