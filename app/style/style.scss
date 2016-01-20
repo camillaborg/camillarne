@@ -1,15 +1,35 @@
-$pink: #FC2768;
-$blue: #5674b9;
-$green: #39b54a;
-$red: #c61f1f;
-$panicRed : #e11f1f;
-
+/* Values from Bootstrap */
 $mobile: 750px;
 $tablet: 970px;
 $desktop: 1170px;
 
+/* Color Variables */
+$bg-color: #eee;
+$heading-color: #333;
+$text-color: #646464;
+$red: #c61f1f;
+$green: #39b54a;
+$orange: #f68e56;
+$panicRed : #e11f1f;
+
+/* Generate .color and .color-text for each color in the list */
+$colors: (
+  'pink' #FC2768,
+  'blue' #5674b9,
+  'green' $green,
+  'red' $red,
+  'orange' $orange
+);
+
+@each $value in $colors {
+  .#{nth($value, 1)}{background-color: nth($value, 2);}
+  .#{nth($value, 1)}-text{color: nth($value, 2);}
+}
+
+
+/* Styling */
 body{
-    background: #eee;
+    background: $bg-color;
     font-family: sans-serif;
     text-align: center;
     font-size: 24px;
@@ -20,25 +40,34 @@ body{
 
 h1, h2, h3, h4, h5, h6{
     font-weight: normal;
-    color: #333;
+    color: $heading-color;
     margin: 0;
 }
-h3{
-    margin-bottom: 20px;
-    .currentPlayerColor{
-        color: pink;
-    }
-}
-p{
-    color: #646464;
-}
-
-.main{padding: 50px 0;}
 
 h1{
     font-size: 4em;
     margin-top: 50px;
 }
+
+h3{
+    margin-bottom: 20px;
+
+    .currentPlayerColor{
+        color: pink;
+    }
+}
+
+h4{
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+p{
+    color: $text-color;
+}
+
+.main{padding: 50px 0;}
+
 
 .players{
     margin-top:50px;
@@ -103,8 +132,8 @@ h1{
     text-align:center;
     background: #005b7f;
     position: absolute;
-    right: 10px;
-    top: 20px;
+    right: 2%;
+    top: 2%;
     color: white;
     -ms-transform: rotate(32deg); /* IE 9 */
     -webkit-transform: rotate(32deg); /* Chrome, Safari, Opera */
@@ -116,31 +145,6 @@ h1{
         padding-top: 46px;
         padding-left: 36px;
     }
-}
-
-.blue{
-    background: $blue;
-}
-.blue-text{
-    color: $blue;
-}
-.pink{
-    background:$pink;
-}
-.pink-text{
-    color:$pink;
-}
-.green{
-    background:$green;
-}
-.green-text{
-    color:$green;
-}
-.red{
-  background-color:$red;
-}
-.red-text{
-  color:$red;
 }
 
 .options{
@@ -174,7 +178,7 @@ li{
     }
 
     &:first-child button{
-       background-color: #39b54a;
+       background-color: $green;
     }
 
     &:nth-child(2) button{
@@ -184,7 +188,7 @@ li{
         background-color: #f26d7d;
     }
     &:nth-child(4) button{
-        background-color: #f68e56;
+        background-color: $orange;
     }
     button{
         color: white;
