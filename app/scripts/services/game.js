@@ -35,7 +35,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
               self.inProgress = update.inProgress;
 
               self.ref.update(update);
-              if(update.inProgress) startGame();
+              if(update.inProgress) {setupGame(); self.ref.off('value');}
         });
       }
                               
@@ -44,7 +44,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
   this.connectTo = function(id){
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) {Error.message = "Game could not be found. Check your ID."; return; }
+          if (!exists) {Error.message = "Game could not be found. Check your ID."; return; } //errormessage doesn't get updated until second press at the moment
       
           Error.message = '';
           self.ref = FirebaseRef.child('Games').child(id);
@@ -60,8 +60,18 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
     });
   }
   
+  function setupGame(){
+    FirebaseRef.child('Questions').once('value', function(snapshot) {
+        var questions = shuffleQuestions(snapshot.val());
+        self.questions = questions;
+        self.ref.update({questions: questions});
+        startGame();
+    });
+  }
+  
   function startGame(){
-    $state.go('set-answer');
+    console.log('start');
+    //$state.go('set-answer');
   }
   
   function setGameParameters(snapshotVal){
@@ -89,5 +99,11 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
   }
   return finalCode.join('');
 }
-    
+  
+  function shuffleQuestions(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    o.splice(self.numOfPlayers * 2);
+    return o;
+  }
+
 }
