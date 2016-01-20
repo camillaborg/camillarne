@@ -1,13 +1,9 @@
 app.controller('GameController', GameController);
 
-function GameController($scope, $interval, Mobile){
+function GameController($scope, $interval, Mobile, GameService){
     $scope.gameID = 'A743Hd';
 
     $scope.onMobile = Mobile;
-    if(!$scope.onMobile) {
-      $scope.gameID = GameService.createGame(generateGameCode());
-      GameService.setUsersTo($scope, 'players');
-    }
 
     $scope.questions = [
         {
@@ -62,7 +58,7 @@ function GameController($scope, $interval, Mobile){
         },
         A2: {
             name: "Camilla",
-            answer: 1,
+            answer: 0,
             color: "blue"
         },
         A3: {
@@ -88,6 +84,7 @@ function GameController($scope, $interval, Mobile){
             return;
         }
     }
+
 
     $scope.chooseAnswer = function(answer){
         $scope.chosenAnswer = answer;

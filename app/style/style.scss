@@ -73,16 +73,23 @@ h1{
     margin: 0 12px;
     position: relative;
 }
-.answer-circle{
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    font-size:20px;
-    text-align:center;
-    display: inline-block;
-    margin: 0 12px;
+
+.answers{
     position: absolute;
+    z-index: 2;
     top: 4px;
+    left: 256px;
+    width: 100%;
+    .answer-circle{
+        width:30px;
+        height:30px;
+        border-radius:50%;
+        font-size:20px;
+        text-align:center;
+        display: inline-block;
+        margin: 0 4px;
+        top: 4px;
+    }
 }
 
 .big-circle{
@@ -135,11 +142,19 @@ h1{
   color:$red;
 }
 
+.options{
+    position: relative;
+}
+
 li{
     position: relative;
     list-style: none;
+    width: 250px;
+    margin: 0 auto;
+    text-align: left;
     button{
         position: relative;
+        width: 100%;
     }
 
     button.wrong:after {
@@ -171,7 +186,6 @@ li{
         background-color: #f68e56;
     }
     button{
-        width: 250px;
         color: white;
         font-size: 20px;
     }

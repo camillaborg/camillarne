@@ -1,11 +1,14 @@
 <div>
     <div class="circle" ng-class="currentPlayer.color"></div>
     <h3>And the answer was...</h3>
-    <div>
+    <div class="options">
         <ul>
             <li ng-repeat="option in currentQuestion.options">
-                <button ng-class="{'correct' : $index == currentQuestion.selectedAnswer, 'wrong' : $index != currentQuestion.selectedAnswer}">{{option}}</button>
-                <div class="answer-circle" ng-repeat="answer in currentQuestion.answers" ng-if="$parent.$index == answer.answer" ng-class="answer.color"></div>
+                <div class="answers">
+                    <div class="answer-circle" ng-repeat="answer in currentQuestion.answers" ng-if="$parent.$index == answer.answer" ng-class="answer.color"></div>
+                </div>
+                <button ng-class="{'correct' : $index == currentQuestion.selectedAnswer, 'wrong' : $index != currentQuestion.selectedAnswer}">{{option}}
+                </button>
             </li>
         </ul>
     </div>
