@@ -71,26 +71,35 @@ function GameController($scope, $interval, Mobile, $state, $timeout, GameService
 
     }
 
-    // Timer funktion
-    $scope.count=7;
-    var counter= $interval(timer, 1000); // kör varje sekund
+    
+        //Timer funktion
+        if($state.is('guess-answer')){
+        $scope.count=7;
+        var counter= $interval(timer, 1000); // kör varje sekund
 
-    function timer() {
-        $scope.count=$scope.count-1;
-        if ($scope.count <= 0) {
-            $interval.cancel(counter);
-            $state.go('display-answer');
-            return;
+        function timer() {
+            $scope.count=$scope.count-1;
+            if ($scope.count <= 0) {
+                $interval.cancel(counter);
+                $state.go('display-answer');
+                return;
+            }
         }
     }
 
-     if($state.is('display-answer')){
-         $timeout(function () {
-            $timeout.cancel();
-            $state.go('guess-answer')
-            console.log('visning slut!')
-        }, 3000);
-     }
+
+
+        if($state.is('display-answer')){
+            var time = $timeout(function () {
+               $state.go('guess-answer')
+               console.log('visning slut!')
+               $timeout.cancel(time);
+           }, 3000);
+
+        }
+
+
+
 
     $scope.chooseAnswer = function(answer){
         $scope.chosenAnswer = answer;
@@ -98,18 +107,4 @@ function GameController($scope, $interval, Mobile, $state, $timeout, GameService
     }
 
 
-    // Funktion för att slice:a ut your till currentPlayer
-    /*function replaceWithName (question){
-        var slice = question.replace("your", "<span>" +   $scope.currentPlayer.name + "'s <span> ");
-        return slice;
-    }
-
-    // currentQuestion formateras och körs med slice-funktionen
-    $scope.currentQuestion = $scope.questions[0];
-    $scope.currentQuestion.formattedQuestion = replaceWithName($scope.currentQuestion.question);
-
-    /* Loggar
-    console.log($scope.currentQuestion.formattedQuestion);
-    console.log(replaceWithName($scope.questions[0].question));
-    */
 }
