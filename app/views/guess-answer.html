@@ -1,8 +1,7 @@
 
 <div ng-if="!onMobile">
     <h3 class="timer"></h3>
-    <div class="circle" ng-class="currentPlayer.color"></div>
-    <h4 ng-class="{'red-text': count <= 3}">00:0{{count}}</h4>
+    <h4 ng-class="{'timer-red': count <= 3}">00:0{{count}}</h4>
     <h3>What's <span class="pink-text">{{currentPlayer.name}}'s</span>{{currentQuestion.question}}</h3>
     <ul>
         <li ng-repeat="option in questions[0].options">

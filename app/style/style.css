@@ -95,16 +95,21 @@ p {
   margin: 0 12px;
   position: relative; }
 
-.answer-circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-size: 20px;
-  text-align: center;
-  display: inline-block;
-  margin: 0 12px;
+.answers {
   position: absolute;
-  top: 4px; }
+  z-index: 2;
+  top: 4px;
+  left: 256px;
+  width: 100%; }
+  .answers .answer-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 4px;
+    top: 4px; }
 
 .big-circle {
   display: none;
@@ -133,11 +138,18 @@ p {
     padding-top: 46px;
     padding-left: 36px; }
 
+.options {
+  position: relative; }
+
 li {
   position: relative;
-  list-style: none; }
+  list-style: none;
+  width: 250px;
+  margin: 0 auto;
+  text-align: left; }
   li button {
-    position: relative; }
+    position: relative;
+    width: 100%; }
   li button.wrong:after {
     content: '\A';
     position: absolute;
@@ -160,7 +172,6 @@ li {
   li:nth-child(4) button {
     background-color: #f68e56; }
   li button {
-    width: 250px;
     color: white;
     font-size: 20px; }
 
@@ -192,3 +203,10 @@ li {
   .ready-button p {
     margin-top: 30%;
     color: white; }
+
+h4 {
+  font-size: 3em;
+  margin-bottom: 10px; }
+
+.timer-red {
+  color: #e11f1f; }

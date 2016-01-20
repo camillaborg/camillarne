@@ -10,6 +10,7 @@ $text-color: #646464;
 $red: #c61f1f;
 $green: #39b54a;
 $orange: #f68e56;
+$panicRed : #e11f1f;
 
 /* Generate .color and .color-text for each color in the list */
 $colors: (
@@ -102,16 +103,23 @@ p{
     margin: 0 12px;
     position: relative;
 }
-.answer-circle{
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    font-size:20px;
-    text-align:center;
-    display: inline-block;
-    margin: 0 12px;
+
+.answers{
     position: absolute;
+    z-index: 2;
     top: 4px;
+    left: 256px;
+    width: 100%;
+    .answer-circle{
+        width:30px;
+        height:30px;
+        border-radius:50%;
+        font-size:20px;
+        text-align:center;
+        display: inline-block;
+        margin: 0 4px;
+        top: 4px;
+    }
 }
 
 .big-circle{
@@ -139,11 +147,19 @@ p{
     }
 }
 
+.options{
+    position: relative;
+}
+
 li{
     position: relative;
     list-style: none;
+    width: 250px;
+    margin: 0 auto;
+    text-align: left;
     button{
         position: relative;
+        width: 100%;
     }
 
     button.wrong:after {
@@ -175,7 +191,6 @@ li{
         background-color: $orange;
     }
     button{
-        width: 250px;
         color: white;
         font-size: 20px;
     }
@@ -214,4 +229,11 @@ li{
     margin-top:30%;
     color: white;
   }
+}
+h4{
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+.timer-red{
+  color: $panicRed;
 }
