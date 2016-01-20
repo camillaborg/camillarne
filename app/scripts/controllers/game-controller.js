@@ -1,6 +1,6 @@
-app.controller('GameController', GameController);
+app.controller('GameController', GameController)
 
-function GameController($scope, $interval, Mobile, GameService){
+function GameController($scope, $interval, Mobile, $state, $timeout, GameService){
     $scope.gameID = 'A743Hd';
 
     $scope.onMobile = Mobile;
@@ -71,25 +71,32 @@ function GameController($scope, $interval, Mobile, GameService){
 
     }
 
+    // Timer funktion
     $scope.count=7;
     var counter= $interval(timer, 1000); // kör varje sekund
 
-    function timer()
-    {
+    function timer() {
         $scope.count=$scope.count-1;
-        if ($scope.count <= 0)
-        {
-            //counter ended, do something here
+        if ($scope.count <= 0) {
             $interval.cancel(counter);
+            $state.go('display-answer');
             return;
         }
     }
 
+     if($state.is('display-answer')){
+         $timeout(function () {
+            $timeout.cancel();
+            $state.go('guess-answer')
+            console.log('visning slut!')
+        }, 3000);
+     }
 
     $scope.chooseAnswer = function(answer){
         $scope.chosenAnswer = answer;
         console.log($scope.chosenAnswer);
     }
+
 
     // Funktion för att slice:a ut your till currentPlayer
     /*function replaceWithName (question){

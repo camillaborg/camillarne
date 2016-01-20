@@ -2,6 +2,7 @@ $pink: #FC2768;
 $blue: #5674b9;
 $green: #39b54a;
 $red: #c61f1f;
+$panicRed : #e11f1f;
 
 $mobile: 750px;
 $tablet: 970px;
@@ -230,5 +231,5 @@ h4{
   margin-bottom: 10px;
 }
 .timer-red{
-  color: $red;
+  color: $panicRed;
 }
