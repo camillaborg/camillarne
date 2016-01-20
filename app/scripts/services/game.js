@@ -1,6 +1,6 @@
 app.service('Game', Game);
 
-function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
+function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
   var self = this;
   
   this.ref = null;
@@ -33,9 +33,11 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
               var update = checkPlayers(snapshot.val().players);
               self.numOfPlayers = update.numOfPlayers;
               self.inProgress = update.inProgress;
+              self.players = snapshot.val().players;
 
               self.ref.update(update);
               if(update.inProgress) {setupGame(); self.ref.off('value');}
+              $rootScope.$apply();
         });
       }
                               
@@ -44,7 +46,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
   this.connectTo = function(id){
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) {Error.message = "Game could not be found. Check your ID."; return; } //errormessage doesn't get updated until second press at the moment
+          if (!exists) {Error.message = "Game could not be found. Check your ID.";  $rootScope.$apply(); return; } //errormessage doesn't get updated until second press at the moment
       
           Error.message = '';
           self.ref = FirebaseRef.child('Games').child(id);
@@ -57,6 +59,8 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state){
               setGameParameters(snapshot.val());
               if(self.inProgress) startGame();
           });
+      
+          $rootScope.$apply();
     });
   }
   
