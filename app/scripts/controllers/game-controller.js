@@ -99,21 +99,6 @@ function GameController($scope, $interval, Mobile, $state, $timeout, GameService
         console.log($scope.chosenAnswer);
     }
 
-
-    // Funktion för att slice:a ut your till currentPlayer
-    /*function replaceWithName (question){
-        var slice = question.replace("your", "<span>" +   $scope.currentPlayer.name + "'s <span> ");
-        return slice;
-    }
-
-    // currentQuestion formateras och körs med slice-funktionen
-    $scope.currentQuestion = $scope.questions[0];
-    $scope.currentQuestion.formattedQuestion = replaceWithName($scope.currentQuestion.question);
-
-    /* Loggar
-    console.log($scope.currentQuestion.formattedQuestion);
-    console.log(replaceWithName($scope.questions[0].question));
-    */
 }
 
 
