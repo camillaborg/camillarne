@@ -1,4 +1,5 @@
 app.controller('GameController', GameController)
+var rounds = 0;
 
 function GameController($scope, $interval, Mobile, $state, $timeout, GameService){
     $scope.gameID = 'A743Hd';
@@ -71,7 +72,10 @@ function GameController($scope, $interval, Mobile, $state, $timeout, GameService
 
     }
 
-    
+
+         if(rounds < 5){
+             $scope.currentQuestion = $scope.questions[1];
+         }
         //Timer funktion
         if($state.is('guess-answer')){
         $scope.count=7;
@@ -89,9 +93,17 @@ function GameController($scope, $interval, Mobile, $state, $timeout, GameService
 
 
 
+
         if($state.is('display-answer')){
             var time = $timeout(function () {
-               $state.go('guess-answer')
+                if(rounds <= 1) {
+                    $state.go('guess-answer')
+                    rounds++;
+                    console.log(rounds);
+                }
+                else{
+                    $state.go('result')
+                }
                console.log('visning slut!')
                $timeout.cancel(time);
            }, 3000);
