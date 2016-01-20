@@ -1,16 +1,8 @@
 var app = angular.module('app', ['firebase', 'ui.router'])
-          .value('CurrentGame', generateGame())
-          .value('CurrentUser', {ready: false})
-          .constant('FirebaseURL', 'https://friend-or-fraud.firebaseio.com/')
+          .constant('FirebaseRef', new Firebase('https://friend-or-fraud.firebaseio.com/'))
           .constant('Mobile', isMobile())
+          .service('Error', function(){ this.message = '' })
           .config(config);
-
-function generateGame(){
-  return {
-      inProgress: false,
-      numOfPlayers: 0
-    }
-}
 
 function isMobile(){
   var check = false;
@@ -48,3 +40,4 @@ function config($stateProvider, $urlRouterProvider){
         controller: "GameController"
         })
 }
+

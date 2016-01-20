@@ -1,6 +1,6 @@
 app.controller('GameController', GameController);
 
-function GameController($scope, $interval, Mobile, $state, GameService){
+function GameController($scope, $interval, Mobile, $state){
     $scope.gameID = 'A743Hd';
 
     $scope.onMobile = Mobile;
