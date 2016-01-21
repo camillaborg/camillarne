@@ -4,6 +4,7 @@ var rounds = 0;
 function GameController($scope, $interval, Mobile, $state, $timeout, Game){
     $scope.onMobile = Mobile;
     $scope.game = Game;
+    console.log(Game.questions);
 
     // $scope.hasAnswered = ["Emma", "Mikaela"];
     // $scope.numOfPlayers = 3;
@@ -61,7 +62,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
 
                 function timer() {
                     $scope.count = $scope.count - 1;
-                    if ($scope.count <= 0 || Game.numOfPlayers == Game.hasAnswered.length) {
+                    if ($scope.count <= 0 /*|| Game.numOfPlayers == Game.hasAnswered.length*/) {
                         //$scope.currentQuestion = $scope.questions[1];
                         $interval.cancel(counter);
                         $state.go('display-answer');
@@ -89,7 +90,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
             $scope.chooseAnswer = function (answer) {
                 $scope.chosenAnswer = answer;
                 console.log($scope.chosenAnswer);
-                $scope.hasAnswered.push("Camilla");
+                //$scope.hasAnswered.push("Camilla");
 
 
             }

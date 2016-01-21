@@ -4,21 +4,21 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   var self = this,
       currentPlayerIndex = 0,
       currentQuestionIndex = 0;
-  
+
   this.ref = null;
   this.inProgress = false;
   this.numOfPlayers = 0;
   this.id = '...';
   this.playerOrder = [];
-  
+
   this.createNew = function(){
     var id = generateGameCode();
-    
+
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
         if (snapshot.val() === null) addToFirebase(id);
         else self.createGame();
     });
-    
+
     function addToFirebase(id){
         self.id = id;
         self.ref = FirebaseRef.child('Games').child(id);
@@ -26,7 +26,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
 
         $firebaseAuth(FirebaseRef).$authAnonymously().then(function(authData) {
               console.log("Logged in as:", authData.uid);
-              self.ref.onDisconnect().remove();  
+              self.ref.onDisconnect().remove();
             }, {remember: "sessionOnly"})
              .catch(function(error) {
               console.error("Authentication failed:", error);
@@ -41,71 +41,71 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
 
               self.ref.update(update);
               if(update.inProgress) {setupGame(); self.ref.off('value');}
-              $rootScope.$apply();
+              //$rootScope.$apply();
         });
       }
-                              
+
   };
 
   this.connectTo = function(id){
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) {Error.message = "Game could not be found. Check your ID.";  $rootScope.$apply(); return; }
-      
+          if (!exists) {Error.message = "Game could not be found. Check your ID.";  /*$rootScope.$apply();*/ return; }
+
           Error.message = '';
           self.ref = FirebaseRef.child('Games').child(id);
           self.id = id;
           self.inProgress = snapshot.val().inProgress;
           self.numOfPlayers = snapshot.val().numOfPlayers;
           CurrentUser.state = 'connected';
-                
+
           self.ref.on('value', function(snapshot){
               setGameParameters(snapshot.val());
               if(self.inProgress) startGame();
           });
-      
-          $rootScope.$apply();
+
+          //$rootScope.$apply();
     });
   }
-  
+
   this.nextQuestion = function(){
     currentPlayerIndex = currentPlayerIndex == numOfPlayers ? 0 : currentPlayerIndex++;
     currentQuestionIndex = currentQuestionIndex++;
     if(currentQuestionIndex > self.questions.length) endGame();
   }
-  
+
   function setupGame(){
     FirebaseRef.child('Questions').once('value', function(snapshot) {
         self.questions = shuffleArray(snapshot.val()).splice(5);
-      
+
         self.playerOrder = shuffleArray(self.playerOrder);
-        
+
         self.currentQuestion = self.questions[currentQuestionIndex];
         self.currentPlayer = self.playerOrder[currentPlayerIndex];
-      
+
         self.ref.update({playerOrder: self.playerOrder, questions: self.questions, currentPlayer: self.currentPlayer, currentQuestion : self.currentQuestion});
         startGame();
     });
   }
-  
+
   function startGame(){
     console.log('start');
-    $rootScope.$apply();
+    //$rootScope.$apply();
     //$state.go('set-answer');
   }
-  
+
   function endGame(){
   }
-  
+
   function setGameParameters(snapshotVal){
     self.inProgress = snapshotVal.inProgress;
     self.players = snapshotVal.players;
     self.numOfPlayers = snapshotVal.numOfPlayers;
   }
-  
+
   function checkPlayers(players){
       var size = 0, ready = [], play = false;
-    
+
       for (key in players) {
          if (players.hasOwnProperty(key)) size++;
          ready.push(players[key].ready);
@@ -113,7 +113,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
       if(ready.indexOf(false) === -1 && ready.length) play = true;
       return {numOfPlayers: size, inProgress: play};
   }
-  
+
   function generateGameCode(){
   var finalCode = [],
       possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -122,7 +122,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   }
   return finalCode.join('');
 }
-  
+
   function shuffleArray(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
