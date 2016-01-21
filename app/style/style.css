@@ -215,7 +215,16 @@ h5 {
 .timer-red {
   color: #e11f1f; }
 
-.game-over-header li {
-  display: inline-block;
-  text-align: center;
-  font-weight: bold; }
+.game-over {
+  display: flex; }
+  .game-over .game-over-players {
+    width: 40%;
+    margin-left: 200px; }
+    .game-over .game-over-players li:first-child {
+      font-weight: bold;
+      text-decoration: underline; }
+  .game-over .game-over-points {
+    flex: 1; }
+    .game-over .game-over-points li:first-child {
+      font-weight: bold;
+      text-decoration: underline; }

@@ -241,9 +241,21 @@ h5{
 .timer-red{
   color: $panicRed;
 }
-
-.game-over-header li{
-  display: inline-block;
-  text-align: center;
-  font-weight: bold;
+.game-over{
+  display: flex;
+  .game-over-players{
+    width: 40%;
+    margin-left: 200px;
+    li:first-child{
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+  .game-over-points{
+    flex: 1;
+    li:first-child{
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
 }
