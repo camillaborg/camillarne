@@ -37,6 +37,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
               self.numOfPlayers = update.numOfPlayers;
               self.inProgress = update.inProgress;
               self.players = snapshot.val().players;
+              self.playerOrder = snapshot.val().playerOrder;
 
               self.ref.update(update);
               if(update.inProgress) {setupGame(); self.ref.off('value');}
@@ -49,7 +50,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   this.connectTo = function(id){
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) {Error.message = "Game could not be found. Check your ID.";  $rootScope.$apply(); return; } //errormessage doesn't get updated until second press at the moment
+          if (!exists) {Error.message = "Game could not be found. Check your ID.";  $rootScope.$apply(); return; }
       
           Error.message = '';
           self.ref = FirebaseRef.child('Games').child(id);
@@ -75,16 +76,14 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   
   function setupGame(){
     FirebaseRef.child('Questions').once('value', function(snapshot) {
-        var questions = shuffleArray(snapshot.val());
-        self.questions = questions.splice(self.numOfPlayers * 2);
-        self.currentQuestion = 0;
+        self.questions = shuffleArray(snapshot.val()).splice(5);
       
         self.playerOrder = shuffleArray(self.playerOrder);
         
         self.currentQuestion = self.questions[currentQuestionIndex];
         self.currentPlayer = self.playerOrder[currentPlayerIndex];
       
-        self.ref.update({playerOrder: self.playerOrder, questions: questions, currentPlayer: self.currentPlayer, currentQuestion : self.currentQuestion});
+        self.ref.update({playerOrder: self.playerOrder, questions: self.questions, currentPlayer: self.currentPlayer, currentQuestion : self.currentQuestion});
         startGame();
     });
   }
