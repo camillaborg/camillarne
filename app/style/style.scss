@@ -6,11 +6,12 @@ $desktop: 1170px;
 /* Color Variables */
 $bg-color: #eee;
 $heading-color: #333;
-$text-color: #646464;
+$text-color: #383838;
 $red: #c61f1f;
 $green: #39b54a;
 $orange: #f68e56;
 $panicRed : #e11f1f;
+$outline: white;//#FFA500; /*E8079B*/
 
 /* Generate .color and .color-text for each color in the list */
 $colors: (
@@ -64,6 +65,10 @@ h4{
 
 p{
     color: $text-color;
+}
+
+a{
+  text-decoration: none;
 }
 
 .main{padding: 50px 0;}
@@ -193,6 +198,14 @@ li{
     button{
         color: white;
         font-size: 20px;
+        &.play-again{
+          a{
+            color: white;
+          }
+          margin-top: 10em;
+          background-color: #FFA500;
+          border: 2px solid $text-color;
+      }
     }
 }
 
@@ -237,7 +250,9 @@ h4{
 h5{
   margin: 15px 15px;
   font-size: 3em;
+  text-shadow: -1px -1px 0 $outline, 1px -1px 0 $outline, -1px 1px 0 $outline, 1px 1px 0 $outline;
 }
+
 .timer-red{
   color: $panicRed;
 }
@@ -258,4 +273,32 @@ h5{
       text-decoration: underline;
     }
   }
+}
+.overlay{
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+.how-to-play{
+    border: 13px solid#033D54;
+    height: 20%;
+    z-index: 200;
+    width: 40%;
+    height: 50%;
+    margin: 0 auto;
+    position: absolute;
+    left: 31%;
+    top: 25%;
+    background-color: #EAEAEA;
+    color: #5E4F4F;
+    span{
+        float: right;
+        margin-right: 13px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 }
