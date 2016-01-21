@@ -32,6 +32,7 @@ function MainController($scope, Error, CurrentUser, Game, Mobile){
             CurrentUser.ref.onDisconnect().remove();
 
             CurrentUser.state = 'registered';
+
             Game.playerOrder = Game.playerOrder || [];
             Game.playerOrder.push(authData.uid);
             Game.ref.update({playerOrder: Game.playerOrder});
