@@ -60,7 +60,10 @@ h4 {
   margin-bottom: 10px; }
 
 p {
-  color: #646464; }
+  color: #383838; }
+
+a {
+  text-decoration: none; }
 
 .main {
   padding: 50px 0; }
@@ -174,6 +177,12 @@ li {
   li button {
     color: white;
     font-size: 20px; }
+    li button.play-again {
+      margin-top: 10em;
+      background-color: #FFA500;
+      border: 2px solid #383838; }
+      li button.play-again a {
+        color: white; }
 
 .mobile {
   font-size: 2em; }
@@ -210,7 +219,8 @@ h4 {
 
 h5 {
   margin: 15px 15px;
-  font-size: 3em; }
+  font-size: 3em;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; }
 
 .timer-red {
   color: #e11f1f; }
