@@ -69,12 +69,13 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   }
   
   this.nextQuestion = function(){
-    currentPlayerIndex = currentPlayerIndex == numOfPlayers ? 0 : currentPlayerIndex++;
-    currentQuestionIndex = currentQuestionIndex++;
-    if(currentQuestionIndex > self.questions.length) endGame();
+    currentPlayerIndex = currentPlayerIndex == self.numOfPlayers ? 0 : currentPlayerIndex++;
+    currentQuestionIndex++;
+    if(currentQuestionIndex == self.questions.length) endGame();
     
     self.currentQuestion = self.questions[currentQuestionIndex];
     setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
+    
     self.ref.update({currentQuestion : self.currentQuestion});
   }
   
@@ -106,6 +107,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   }
   
   function endGame(){
+    $state.go('result');
   }
   
   function setGameParameters(snapshotVal){
