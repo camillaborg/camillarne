@@ -131,7 +131,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
          if (players.hasOwnProperty(key)) size++;
          ready.push(players[key].ready);
       }
-      if(ready.indexOf(false) === -1 && ready.length) play = true;
+      if(ready.indexOf(false) === -1 && ready.length /*&& self.numOfPlayers > 1*/) play = true;
       return {numOfPlayers: size, inProgress: play};
   }
 

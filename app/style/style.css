@@ -31,6 +31,9 @@
 .orange-text {
   color: #f68e56; }
 
+.fish {
+  background-image: url("../avatars/fish.svg"); }
+
 /* Styling */
 body {
   background: #eee;
@@ -52,8 +55,6 @@ h1 {
 
 h3 {
   margin-bottom: 20px; }
-  h3 .currentPlayerColor {
-    color: pink; }
 
 h4 {
   font-size: 3em;
@@ -66,7 +67,10 @@ a {
   text-decoration: none; }
 
 .main {
-  padding: 50px 0; }
+  padding: 15px 0; }
+  @media (min-width: 970px) {
+    .main {
+      padding: 50px 0; } }
 
 .players {
   margin-top: 50px; }
@@ -82,7 +86,10 @@ a {
   text-align: center;
   display: inline-block;
   margin: 0 12px;
-  position: relative; }
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center; }
   .circle img {
     position: absolute;
     left: -10px;

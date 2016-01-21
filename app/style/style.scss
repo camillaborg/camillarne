@@ -27,7 +27,13 @@ $colors: (
   .#{nth($value, 1)}-text{color: nth($value, 2);}
 }
 
+$avatars: 'fish';
 
+@each $item in $avatars {
+    .#{$item}{
+        background-image: url("../avatars/#{$item}.svg");
+    }
+}
 /* Styling */
 body{
     background: $bg-color;
@@ -52,10 +58,6 @@ h1{
 
 h3{
     margin-bottom: 20px;
-
-    .currentPlayerColor{
-        color: pink;
-    }
 }
 
 h4{
@@ -71,7 +73,9 @@ a{
   text-decoration: none;
 }
 
-.main{padding: 50px 0;}
+.main{ 
+    padding: 15px 0;
+    @media(min-width:$tablet){padding: 50px 0;}}
 
 
 .players{
@@ -91,6 +95,10 @@ a{
     display: inline-block;
     margin: 0 12px;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    
     img{
         position: absolute;
         left: -10px;
