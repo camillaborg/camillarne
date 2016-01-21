@@ -1,6 +1,6 @@
 app.service('Game', Game);
 
-function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
+function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
   var self = this,
       currentPlayerIndex = 0,
       currentQuestionIndex = 0;
@@ -40,8 +40,8 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
               self.playerOrder = snapshot.val().playerOrder;
 
               self.ref.update(update);
-              if(update.inProgress) {setupGame(); self.ref.off('value');}
-              $rootScope.$apply();
+              if(update.inProgress) {self.ref.off('value'); setupGame();}
+              if(!$rootScope.$$phase) $rootScope.$apply();
         });
       }
 
@@ -50,21 +50,21 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   this.connectTo = function(id){
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) {Error.message = "Game could not be found. Check your ID.";  $rootScope.$apply(); return; }
+          if (!exists) {Error.message = "Game could not be found. Check your ID.";  if(!$rootScope.$$phase) {$rootScope.$apply();} return; }
 
           Error.message = '';
           self.ref = FirebaseRef.child('Games').child(id);
           self.id = id;
           self.inProgress = snapshot.val().inProgress;
           self.numOfPlayers = snapshot.val().numOfPlayers;
-          CurrentUser.state = 'connected';
+          UserState.state = 'connected';
 
           self.ref.on('value', function(snapshot){
               setGameParameters(snapshot.val());
-              if(self.inProgress) startGame();
+              if(self.inProgress) {self.ref.off('value'); startGame();}
           });
 
-          $rootScope.$apply();
+          if(!$rootScope.$$phase) $rootScope.$apply();
     });
   }
 
@@ -104,8 +104,10 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   }
 
   function startGame(){
-    console.log('start');
-    $rootScope.$apply();
+    self.ref.on('value', function(snapshot){
+       setGameParameters(snapshot.val());
+       if(!$rootScope.$$phase) $rootScope.$apply();
+    });
     $state.go('set-answer');
   }
 
@@ -117,6 +119,9 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
     self.inProgress = snapshotVal.inProgress;
     self.players = snapshotVal.players;
     self.numOfPlayers = snapshotVal.numOfPlayers;
+    self.currentPlayer = snapshotVal.currentPlayer;
+    self.questions = snapshotVal.questions;
+    self.currentQuestion = snapshotVal.currentQuestion;
   }
 
   function checkPlayers(players){
