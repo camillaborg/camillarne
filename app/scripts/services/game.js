@@ -41,7 +41,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
 
               self.ref.update(update);
               if(update.inProgress) {setupGame(); self.ref.off('value');}
-              //$rootScope.$apply();
+              $rootScope.$apply();
         });
       }
 
@@ -50,7 +50,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   this.connectTo = function(id){
     FirebaseRef.child('Games').child(id).once('value', function(snapshot) {
           var exists = (snapshot.val() !== null);
-          if (!exists) {Error.message = "Game could not be found. Check your ID.";  /*$rootScope.$apply();*/ return; }
+          if (!exists) {Error.message = "Game could not be found. Check your ID.";  $rootScope.$apply(); return; }
 
           Error.message = '';
           self.ref = FirebaseRef.child('Games').child(id);
@@ -64,7 +64,7 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
               if(self.inProgress) startGame();
           });
 
-          //$rootScope.$apply();
+          $rootScope.$apply();
     });
   }
 
@@ -105,8 +105,8 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
 
   function startGame(){
     console.log('start');
-    //$rootScope.$apply();
-    //$state.go('set-answer');
+    $rootScope.$apply();
+    $state.go('set-answer');
   }
 
   function endGame(){

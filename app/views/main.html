@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div ng-if="!onMobile" class="mobile">
+    <div ng-if="onMobile" class="mobile">
         <div ng-if="user.state === 'start'">
             <p>Enter your <span class="pink-text">Game ID</span> below:</p>
             <input type="text" ng-model="connectID">

@@ -1,4 +1,4 @@
-<div>
+<div ng-if="!onMobile">
     <div class="circle" ng-class="currentPlayer.color"></div>
     <h3><span ng-class="currentPlayer.color + '-text'">{{currentPlayer.name}}!</span> What's your {{currentQuestion.question}}</h3>
     <ul>
@@ -7,4 +7,14 @@
      </li>
     </ul>
 
+</div>
+
+
+<div ng-if="onMobile && user == game.currentPlayer">
+  Current plauyer
+</div>
+
+
+<div ng-if="onMobile && user != game.currentPlayer">
+ Not current player 
 </div>
