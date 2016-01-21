@@ -72,6 +72,17 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
     currentPlayerIndex = currentPlayerIndex == numOfPlayers ? 0 : currentPlayerIndex++;
     currentQuestionIndex = currentQuestionIndex++;
     if(currentQuestionIndex > self.questions.length) endGame();
+    
+    self.currentQuestion = self.questions[currentQuestionIndex];
+    setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
+    self.ref.update({currentQuestion : self.currentQuestion});
+  }
+  
+  function setCurrentPlayer(id){
+       self.ref.child('players').once('value', function(snapshot) {
+          self.currentPlayer = snapshot.val()[id];
+          self.ref.update({currentPlayer: self.currentPlayer});
+       });
   }
   
   function setupGame(){
@@ -81,9 +92,9 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
         self.playerOrder = shuffleArray(self.playerOrder);
         
         self.currentQuestion = self.questions[currentQuestionIndex];
-        self.currentPlayer = self.playerOrder[currentPlayerIndex];
+        setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
       
-        self.ref.update({playerOrder: self.playerOrder, questions: self.questions, currentPlayer: self.currentPlayer, currentQuestion : self.currentQuestion});
+        self.ref.update({playerOrder: self.playerOrder, questions: self.questions, currentQuestion : self.currentQuestion});
         startGame();
     });
   }
