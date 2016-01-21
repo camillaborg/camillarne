@@ -61,7 +61,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
 
                 function timer() {
                     $scope.count = $scope.count - 1;
-                    if ($scope.count <= 0 || $scope.numOfPlayers == $scope.hasAnswered.length) {
+                    if ($scope.count <= 0 || Game.numOfPlayers == Game.hasAnswered.length) {
                         //$scope.currentQuestion = $scope.questions[1];
                         $interval.cancel(counter);
                         $state.go('display-answer');
