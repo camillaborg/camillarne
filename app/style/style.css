@@ -254,4 +254,8 @@ h5 {
     float: right;
     margin-right: 13px;
     font-weight: bold;
-    cursor: pointer; }
+    cursor: pointer;
+    color: #B3B3B3; }
+  .how-to-play span:hover {
+    color: #5E4F4F;
+    transition: color 1s; }
