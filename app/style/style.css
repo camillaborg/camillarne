@@ -208,5 +208,23 @@ h4 {
   font-size: 3em;
   margin-bottom: 10px; }
 
+h5 {
+  margin: 15px 15px;
+  font-size: 3em; }
+
 .timer-red {
   color: #e11f1f; }
+
+.game-over {
+  display: flex; }
+  .game-over .game-over-players {
+    width: 40%;
+    margin-left: 200px; }
+    .game-over .game-over-players li:first-child {
+      font-weight: bold;
+      text-decoration: underline; }
+  .game-over .game-over-points {
+    flex: 1; }
+    .game-over .game-over-points li:first-child {
+      font-weight: bold;
+      text-decoration: underline; }
