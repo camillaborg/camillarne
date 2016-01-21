@@ -69,8 +69,8 @@ function Game(CurrentUser, FirebaseRef, $firebaseAuth, Error, $state, $rootScope
   }
 
   this.nextQuestion = function(){
-    currentPlayerIndex = currentPlayerIndex == numOfPlayers ? 0 : currentPlayerIndex++;
-    currentQuestionIndex = currentQuestionIndex++;
+    currentPlayerIndex = currentPlayerIndex == self.numOfPlayers ? 0 : currentPlayerIndex++;
+    currentQuestionIndex++;
     if(currentQuestionIndex > self.questions.length) endGame();
 
     self.currentQuestion = self.questions[currentQuestionIndex];

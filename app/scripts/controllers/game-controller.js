@@ -1,5 +1,4 @@
 app.controller('GameController', GameController)
-var rounds = 0;
 
 function GameController($scope, $interval, Mobile, $state, $timeout, Game){
     $scope.onMobile = Mobile;
@@ -33,7 +32,6 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
     //
     // }
 
-         if(rounds == 1) {
             //  $scope.currentQuestion = $scope.game.questions[0];
             //  $scope.currentQuestion.selectedAnswer = 1;
             //  $scope.currentPlayer = $scope.players.A2;
@@ -54,7 +52,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
             //          color: "green"
             //      }
             //  }
-         }
+
             //Timer funktion
             if($state.is('guess-answer')) {
                 $scope.count = 7;
@@ -73,14 +71,9 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
 
         if($state.is('display-answer')) {
             var time = $timeout(function () {
-                if (rounds <= 1) {
-                    $state.go('guess-answer')
-                    rounds++;
-                    console.log(rounds);
-                }
-                else {
-                    $state.go('result')
-                }
+                Game.nextQuestion();
+                $state.go('guess-answer')
+
                 console.log('visning slut!')
                 $timeout.cancel(time);
             }, 3000);
@@ -89,7 +82,6 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game){
 
             $scope.chooseAnswer = function (answer) {
                 $scope.chosenAnswer = answer;
-                console.log($scope.chosenAnswer);
                 //$scope.hasAnswered.push("Camilla");
 
 
