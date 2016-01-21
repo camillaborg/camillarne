@@ -2,7 +2,8 @@ var app = angular.module('app', ['firebase', 'ui.router'])
           .constant('FirebaseRef', new Firebase('https://friend-or-fraud.firebaseio.com/'))
           .constant('Mobile', isMobile())
           .service('Error', function(){ this.message = '' })
-          .config(config);
+          .config(config)
+          .service('UserState', function(){this.state = 'start'; });
 
 function isMobile(){
   var check = false;

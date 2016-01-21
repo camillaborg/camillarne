@@ -17,20 +17,19 @@
         </div>
     </div>
 
-
-    <div ng-if="onMobile" class="mobile">
-        <div ng-if="user.state === 'start'">
+    <div ng-if="onMobile" class="mobile" ng-switch="state.state">
+        <div ng-switch-when="start">
             <p>Enter your <span class="pink-text">Game ID</span> below:</p>
             <input type="text" ng-model="connectID">
             <button ng-click="connectToGame(connectID)">Connect</button>
         </div>
-        <div ng-if="user.state === 'connected'">
+        <div ng-switch-when="connected">
             <p>Connected to <span class="pink-text">{{game.id}}</span>!</p>
             <p>What's your name?</p>
             <input type="text" ng-model="username">
             <button ng-click="setUser(username)">Submit</button>
         </div>
-        <div ng-if="user.state === 'registered'">
+        <div ng-switch-when="registered">
             <p>Welcome, <span ng-class="user.color + '-text'">{{user.name}}</span></p>
             <div class="ready-button" class="red" ng-class="{'active': user.ready}" ng-click="toggleReady()"><span>Ready</span></div>
         </div>

@@ -6,11 +6,12 @@ $desktop: 1170px;
 /* Color Variables */
 $bg-color: #eee;
 $heading-color: #333;
-$text-color: #646464;
+$text-color: #383838;
 $red: #c61f1f;
 $green: #39b54a;
 $orange: #f68e56;
 $panicRed : #e11f1f;
+$outline: white;//#FFA500; /*E8079B*/
 
 /* Generate .color and .color-text for each color in the list */
 $colors: (
@@ -64,6 +65,10 @@ h4{
 
 p{
     color: $text-color;
+}
+
+a{
+  text-decoration: none;
 }
 
 .main{padding: 50px 0;}
@@ -193,6 +198,14 @@ li{
     button{
         color: white;
         font-size: 20px;
+        &.play-again{
+          a{
+            color: white;
+          }
+          margin-top: 10em;
+          background-color: #FFA500;
+          border: 2px solid $text-color;
+      }
     }
 }
 
@@ -237,7 +250,9 @@ h4{
 h5{
   margin: 15px 15px;
   font-size: 3em;
+  text-shadow: -1px -1px 0 $outline, 1px -1px 0 $outline, -1px 1px 0 $outline, 1px 1px 0 $outline;
 }
+
 .timer-red{
   color: $panicRed;
 }

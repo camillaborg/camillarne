@@ -1,11 +1,11 @@
 app.controller('MainController', MainController);
 
-function MainController($scope, Error, CurrentUser, Game, Mobile){
+function MainController($scope, Error, CurrentUser, UserState, Game, Mobile){
     $scope.user = CurrentUser;
     $scope.game = Game;
     $scope.validationError = Error;
-    $scope.userState = 'start';
     $scope.onMobile = Mobile;
+    $scope.state = UserState;
     $scope.howToPlayButton = false;
 
     if(!$scope.onMobile) {
@@ -13,7 +13,7 @@ function MainController($scope, Error, CurrentUser, Game, Mobile){
     }
 
     $scope.howToPlay = function(){
-        $scope.howToPlayButton = $scope.howToPlayButton == true ? false : true;
+        $scope.howToPlayButton = !$scope.howToPlayButton;
     }
 
     $scope.connectToGame = function (id){
@@ -27,24 +27,7 @@ function MainController($scope, Error, CurrentUser, Game, Mobile){
     $scope.setUser = function(name){
         if(!name) {Error.message = "You need to enter a name."; return;}
         Error.message = "";
-
-        CurrentUser.auth().then(function(authData) {
-            var user = CurrentUser.setDetails(name);
-
-            console.log("Logged in as:", authData.uid);
-            CurrentUser.ref = Game.ref.child('players').child(authData.uid);
-            CurrentUser.ref.set(user);
-            CurrentUser.ref.onDisconnect().remove();
-
-            CurrentUser.state = 'registered';
-
-            Game.playerOrder = Game.playerOrder || [];
-            Game.playerOrder.push(authData.uid);
-            Game.ref.update({playerOrder: Game.playerOrder});
-        }, {remember: "sessionOnly"})
-         .catch(function(error) {
-          console.error("Authentication failed:", error);
-        });
+        CurrentUser.setUser(name);
     }
 
 

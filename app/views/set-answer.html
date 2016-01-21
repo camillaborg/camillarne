@@ -10,20 +10,25 @@
 </div>
 
 
-<div ng-if="onMobile && user == game.currentPlayer">
-  Current player
-
-  
+<div ng-if="onMobile && user.id == game.currentPlayer.id">
+    <div class="circle" ng-class="game.currentPlayer.color"></div>
+    <h3><span ng-class="game.currentPlayer.color + '-text'">{{game.currentPlayer.name}}!</span> What's your {{game.currentQuestion.question}}</h3>
+    <ul>
+       <li ng-repeat="option in game.currentQuestion.options">
+           <button>{{option}}</button>
+       </li>
+    </ul>
 </div>
 
 
-<div ng-if="onMobile && user != game.currentPlayer">
- Not current player
-
- <h3>What's <span class="pink-text">{{game.currentPlayer.name}}'s</span>{{game.currentQuestion.question}}</h3>
+<div ng-if="onMobile && user.id != game.currentPlayer.id">
+  <div class="circle" ng-class="game.currentPlayer.color"></div>
+  <h3><span ng-class="game.currentPlayer.color + '-text'">{{game.currentPlayer.name}}</span> is picking their answer...</h3>
+  
+<!-- <h3>What's <span class="pink-text">{{game.currentPlayer.name}}'s</span>{{game.currentQuestion.question}}</h3>
  <ul>
      <li ng-repeat="option in game.currentQuestion.options">
          <button ng-click="chooseAnswer(option)" ng-class="{'correct' : option == chosenAnswer, 'wrong' : (option != chosenAnswer) && (chosenAnswer != undefined)}">{{option}}</button>
      </li>
- </ul>
+ </ul>-->
 </div>

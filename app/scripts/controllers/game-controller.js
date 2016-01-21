@@ -5,9 +5,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
     $scope.game = Game;
     $scope.user = CurrentUser;
   
-    console.log(Game.questions);
-
-              //Timer funktion
+          //Timer funktion
           if($state.is('guess-answer')) {
                 $scope.count = 7;
                 var counter = $interval(timer, 1000); // kör varje sekund
