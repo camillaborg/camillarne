@@ -13,8 +13,8 @@ gulp.task('sass', function () {
 
 gulp.task('serve', function(){
     browserSync.init({
-        server: "./app",
-        online: true
+        server: "./app"
+       // online: true
     });
 
     gulp.watch("app/index.html").on('change', browserSync.reload);

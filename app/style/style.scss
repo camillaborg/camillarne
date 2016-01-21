@@ -234,6 +234,16 @@ h4{
   font-size: 3em;
   margin-bottom: 10px;
 }
+h5{
+  margin: 15px 15px;
+  font-size: 3em;
+}
 .timer-red{
   color: $panicRed;
+}
+
+.game-over-header li{
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
 }
