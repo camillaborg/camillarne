@@ -14,7 +14,7 @@ gulp.task('sass', function () {
 gulp.task('serve', function(){
     browserSync.init({
         server: "./app",
-        online: true
+        //online: true
     });
 
     gulp.watch("app/index.html").on('change', browserSync.reload);
