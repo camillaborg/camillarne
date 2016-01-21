@@ -238,3 +238,30 @@ h5 {
     .game-over .game-over-points li:first-child {
       font-weight: bold;
       text-decoration: underline; }
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: fixed; }
+
+.how-to-play {
+  border: 13px solid #033D54;
+  height: 20%;
+  z-index: 200;
+  width: 40%;
+  height: 50%;
+  margin: 0 auto;
+  position: absolute;
+  left: 31%;
+  top: 25%;
+  background-color: #EAEAEA;
+  color: #5E4F4F; }
+  .how-to-play span {
+    float: right;
+    margin-right: 13px;
+    font-weight: bold;
+    cursor: pointer; }

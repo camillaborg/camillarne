@@ -6,9 +6,14 @@ function MainController($scope, Error, CurrentUser, Game, Mobile){
     $scope.validationError = Error;
     $scope.userState = 'start';
     $scope.onMobile = Mobile;
+    $scope.howToPlayButton = false;
 
     if(!$scope.onMobile) {
       Game.createNew();
+    }
+
+    $scope.howToPlay = function(){
+        $scope.howToPlayButton = $scope.howToPlayButton == true ? false : true;
     }
 
     $scope.connectToGame = function (id){

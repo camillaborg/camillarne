@@ -1,18 +1,22 @@
-<div class="big-circle blue"><p class="unselectable">How to Play</p></div>
-
-<div class="container main">
-    <div ng-if="!onMobile">
-        <div class="row">
-            <h1>Welcome!</h1>
-            <h2>This is your Game ID: <span class="pink-text">{{game.id}}</span></h2>
+<div class="big-circle blue"><p class="unselectable" ng-click="howToPlay()">How to Play</p></div>
+    <div class="container main">
+        <div class="overlay" ng-if="howToPlayButton">
+            <div class="how-to-play">How to Play <span ng-click="howToPlay()">X</span></div>
         </div>
-        <div class="players row">
-            <div class="player" ng-repeat="player in game.players">
-                <div class="circle" ng-class="player.color"><img ng-show="player.ready" src="images/check.png"></div>
-                <p ng-class="player.color + '-text'">{{player.name}}</p>
+        <div ng-if="!onMobile">
+            <div class="row">
+                <h1>Welcome!</h1>
+                <h2>This is your Game ID: <span class="pink-text">{{game.id}}</span></h2>
+            </div>
+            <div class="players row">
+                <div class="player" ng-repeat="player in game.players">
+                    <div class="circle" ng-class="player.color"><img ng-show="player.ready" src="images/check.png"></div>
+                    <p ng-class="player.color + '-text'">{{player.name}}</p>
+                </div>
             </div>
         </div>
     </div>
+
 
     <div ng-if="onMobile" class="mobile">
         <div ng-if="user.state === 'start'">
@@ -23,7 +27,7 @@
         <div ng-if="user.state === 'connected'">
             <p>Connected to <span class="pink-text">{{game.id}}</span>!</p>
             <p>What's your name?</p>
-        <input type="text" ng-model="username">
+            <input type="text" ng-model="username">
             <button ng-click="setUser(username)">Submit</button>
         </div>
         <div ng-if="user.state === 'registered'">
@@ -32,4 +36,3 @@
         </div>
         <p class="red-text">{{validationError.message}}</p>
     </div>
-</div>
