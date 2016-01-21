@@ -2,23 +2,22 @@
 <div ng-if="!onMobile">
     <h3 class="timer"></h3>
     <h4 ng-class="{'timer-red': count <= 3}">00:0{{count}}</h4>
-    <button ng-click="game()">Start</button>
-    <h3>What's <span class="pink-text">{{currentPlayer.name}}'s</span> {{currentQuestion.question}}</h3>
+    <h3>What's <span class="pink-text">{{game.currentPlayer.name}}'s</span> {{game.currentQuestion.question}}</h3>
     <ul>
-        <li ng-repeat="option in currentQuestion.options">
+        <li ng-repeat="option in game.currentQuestion.options">
             <button ng-click="chooseAnswer(option)" ng-class="{'correct' : option == chosenAnswer, 'wrong' : (option != chosenAnswer) && (chosenAnswer != undefined)}">{{option}}</button>
         </li>
     </ul>
-    <p><span ng-repeat="player in players" ng-if="player.hasAnswered">{{player.name}}{{$last ? '' : ', '}} </span> has answered.</p>
+    <p><span ng-repeat="player in players" ng-if="game.player.hasAnswered">{{game.player.name}}{{$last ? '' : ', '}} </span> has answered.</p>
 
 </div>
 
 <div ng-if="onMobile" class="mobile">
     <h3 class="timer"></h3>
-    <div class="circle" ng-class="currentPlayer.color"></div>
-    <h3>What's <span class="pink-text">{{currentPlayer.name}}'s</span>{{currentQuestion.question}}</h3>
+    <div class="circle" ng-class="game.currentPlayer.color"></div>
+    <h3>What's <span class="pink-text">{{game.currentPlayer.name}}'s</span>{{game.currentQuestion.question}}</h3>
     <ul>
-        <li ng-repeat="option in questions[0].options">
+        <li ng-repeat="option in game.currentQuestion.options">
             <button ng-click="chooseAnswer(option)" ng-class="{'correct' : option == chosenAnswer, 'wrong' : (option != chosenAnswer) && (chosenAnswer != undefined)}">{{option}}</button>
         </li>
     </ul>

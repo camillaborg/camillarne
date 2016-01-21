@@ -1,13 +1,13 @@
 <div>
-    <div class="circle" ng-class="currentPlayer.color"></div>
+    <div class="circle" ng-class="game.currentPlayer.color"></div>
     <h3>And the answer was...</h3>
     <div class="options">
         <ul>
-            <li ng-repeat="option in currentQuestion.options">
+            <li ng-repeat="option in game.currentQuestion.options">
                 <div class="answers">
-                    <div class="answer-circle" ng-repeat="answer in currentQuestion.answers" ng-if="$parent.$index == answer.answer" ng-class="answer.color"></div>
+                    <div class="answer-circle" ng-repeat="answer in game.currentQuestion.answers" ng-if="$parent.$index == answer.answer" ng-class="answer.color"></div>
                 </div>
-                <button ng-class="{'correct' : $index == currentQuestion.selectedAnswer, 'wrong' : $index != currentQuestion.selectedAnswer}">{{option}}
+                <button ng-class="{'correct' : $index == game.currentQuestion.selectedAnswer, 'wrong' : $index != game.currentQuestion.selectedAnswer}">{{option}}
                 </button>
             </li>
         </ul>

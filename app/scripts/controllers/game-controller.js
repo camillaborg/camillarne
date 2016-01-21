@@ -1,99 +1,58 @@
 app.controller('GameController', GameController)
-var rounds = 0;
 
-function GameController($scope, $interval, Mobile, $state, $timeout){
-    $scope.gameID = 'A743Hd';
-
+function GameController($scope, $interval, Mobile, $state, $timeout, Game){
     $scope.onMobile = Mobile;
+    $scope.game = Game;
+    console.log(Game.questions);
 
-    $scope.questions = [
-        {
-          question: " favorite animal?",
-          options: ["Dog", "Monkey", "Cat", "Horse"]
-        },
-        {
-            question: "favorite food?",
-            options: ["Pizza", "Pasta", "Pancakes", "Pie"]
-        }
+    // $scope.hasAnswered = ["Emma", "Mikaela"];
+    // $scope.numOfPlayers = 3;
+    //$scope.currentPlayer = $scope.players.A1;
+    //$scope.currentQuestion = $scope.game.questions[0];
+    //$scope.currentQuestion.selectedAnswer = 0;
 
-    ]
+    // $scope.currentQuestion.answers = {
+    //     A1: {
+    //         name: "Emma",
+    //         answer: 0,
+    //         color: "pink"
+    //     },
+    //     A2: {
+    //         name: "Camilla",
+    //         answer: 0,
+    //         color: "blue"
+    //     },
+    //     A3: {
+    //         name: "Mikaela",
+    //         answer: 2,
+    //         color: "green"
+    //     }
+    //
+    //
+    //
+    // }
 
-    $scope.players = {
-        A1: {
-            name: "Emma",
-            ready: true,
-            score: 0,
-            currentPlayer: true,
-            color: "pink",
-            hasAnswered: false
-        },
-        A2: {
-            name: "Camilla",
-            ready: true,
-            score: 0,
-            currentPlayer: false,
-            color: "blue",
-            hasAnswered: true
+            //  $scope.currentQuestion = $scope.game.questions[0];
+            //  $scope.currentQuestion.selectedAnswer = 1;
+            //  $scope.currentPlayer = $scope.players.A2;
+            //  $scope.currentQuestion.answers = {
+            //      A1: {
+            //          name: "Emma",
+            //          answer: 1,
+            //          color: "pink"
+            //      },
+            //      A2: {
+            //          name: "Camilla",
+            //          answer: 2,
+            //          color: "blue"
+            //      },
+            //      A3: {
+            //          name: "Mikaela",
+            //          answer: 3,
+            //          color: "green"
+            //      }
+            //  }
 
-        },
-        A3: {
-            name: "Mikaela",
-            ready: false,
-            score: 0,
-            currentPlayer: false,
-            color: "green",
-            hasAnswered: true
-
-        }
-        }
-
-    $scope.hasAnswered = ["Emma", "Mikaela"];
-    $scope.numOfPlayers = 3;
-    $scope.currentPlayer = $scope.players.A1;
-    $scope.currentQuestion = $scope.questions[0];
-    $scope.currentQuestion.selectedAnswer = 0;
-    $scope.currentQuestion.answers = {
-        A1: {
-            name: "Emma",
-            answer: 0,
-            color: "pink"
-        },
-        A2: {
-            name: "Camilla",
-            answer: 0,
-            color: "blue"
-        },
-        A3: {
-            name: "Mikaela",
-            answer: 2,
-            color: "green"
-        }
-
-
-
-    }
-
-         if(rounds == 1) {
-             $scope.currentQuestion = $scope.questions[1];
-             $scope.currentQuestion.selectedAnswer = 1;
-             $scope.currentQuestion.answers = {
-                 A1: {
-                     name: "Emma",
-                     answer: 1,
-                     color: "pink"
-                 },
-                 A2: {
-                     name: "Camilla",
-                     answer: 2,
-                     color: "blue"
-                 },
-                 A3: {
-                     name: "Mikaela",
-                     answer: 3,
-                     color: "green"
-                 }
-             }
-         }
             //Timer funktion
             if($state.is('guess-answer')) {
                 $scope.count = 7;
@@ -101,7 +60,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout){
 
                 function timer() {
                     $scope.count = $scope.count - 1;
-                    if ($scope.count <= 0 || $scope.numOfPlayers == $scope.hasAnswered.length) {
+                    if ($scope.count <= 0 /*|| Game.numOfPlayers == Game.hasAnswered.length*/) {
                         //$scope.currentQuestion = $scope.questions[1];
                         $interval.cancel(counter);
                         $state.go('display-answer');
@@ -112,14 +71,9 @@ function GameController($scope, $interval, Mobile, $state, $timeout){
 
         if($state.is('display-answer')) {
             var time = $timeout(function () {
-                if (rounds <= 1) {
-                    $state.go('guess-answer')
-                    rounds++;
-                    console.log(rounds);
-                }
-                else {
-                    $state.go('result')
-                }
+                Game.nextQuestion();
+                $state.go('guess-answer')
+
                 console.log('visning slut!')
                 $timeout.cancel(time);
             }, 3000);
@@ -128,8 +82,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout){
 
             $scope.chooseAnswer = function (answer) {
                 $scope.chosenAnswer = answer;
-                console.log($scope.chosenAnswer);
-                $scope.hasAnswered.push("Camilla");
+                //$scope.hasAnswered.push("Camilla");
 
 
             }
