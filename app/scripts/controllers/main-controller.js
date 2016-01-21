@@ -32,6 +32,8 @@ function MainController($scope, Error, CurrentUser, Game, Mobile){
             CurrentUser.ref.onDisconnect().remove();
           
             CurrentUser.state = 'registered';
+            Game.playerOrder.push(authData.uid);
+            Game.ref.update({playerOrder: Game.playerOrder});
         }, {remember: "sessionOnly"})
          .catch(function(error) {
           console.error("Authentication failed:", error);
