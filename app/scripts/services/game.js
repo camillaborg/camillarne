@@ -1,6 +1,6 @@
 app.service('Game', Game);
 
-function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $state, $rootScope){
+function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $state, $rootScope, Mobile){
   var self = this,
       currentPlayerIndex = 0,
       currentQuestionIndex = 0;
@@ -71,12 +71,14 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   this.nextQuestion = function(){
     //self.questions[currentQuestionIndex] = self.currentQuestion;
     //self.ref.child('questions').update({self.currentQuestion});
+    if(!Mobile) return;
     currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
     currentQuestionIndex++;
 
     if(currentQuestionIndex == self.questions.length) endGame();
-    
+    console.log(self.questions[currentQuestionIndex]);
     self.currentQuestion = self.questions[currentQuestionIndex];
+    console.log(self.currentQuestion);
     setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
     
     resetAnswers(self.players);
