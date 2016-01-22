@@ -34,6 +34,15 @@
 .fish {
   background-image: url("../avatars/fish.svg"); }
 
+.bird {
+  background-image: url("../avatars/bird.svg"); }
+
+.snail {
+  background-image: url("../avatars/snail.svg"); }
+
+.cat {
+  background-image: url("../avatars/cat.svg"); }
+
 /* Styling */
 body {
   background: #eee;
