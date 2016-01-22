@@ -22,16 +22,12 @@
   <div ng-if="user.id == game.currentPlayer.id && !game.currentQuestion.correctAnswers">
         <p>Not a single person answered correctly! No points for you.</p>
   </div>
-  
+
    <div ng-if="user.id != game.currentPlayer.id">
-       <div ng-if="user.answer == currentQuestion.selectedAnswer">
-        Correct: {{currentQuestion.selectedAnswer}}<br>
-        Your: {{user.answer}}
+       <div ng-if="user.answer == game.currentQuestion.selectedAnswer">
          <p>Correct! You earned 1 point. Your current score is {{user.score}}.</p>
        </div>
-       <div ng-if="user.answer != currentQuestion.selectedAnswer">
-        Correct: {{currentQuestion.selectedAnswer}}<br>
-        Your: {{user.answer}}
+       <div ng-if="user.answer != game.currentQuestion.selectedAnswer">
          <p>Wrong! No points this round. Your current score is {{user.score}}.</p>
        </div>
   </div>
