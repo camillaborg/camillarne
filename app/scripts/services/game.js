@@ -71,14 +71,15 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   this.nextQuestion = function(){
     //self.questions[currentQuestionIndex] = self.currentQuestion;
     //self.ref.child('questions').update({self.currentQuestion});
-    currentPlayerIndex = currentPlayerIndex >= self.numOfPlayers ? 0 : currentPlayerIndex+1;
+    currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
     currentQuestionIndex++;
 
     if(currentQuestionIndex == self.questions.length) endGame();
     
     self.currentQuestion = self.questions[currentQuestionIndex];
     setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
-
+    
+    resetAnswers(self.players);
     self.ref.update({currentQuestion : self.currentQuestion});
   }
 
@@ -115,8 +116,8 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
     self.ref.child('players').on('value', function(snapshot){
-        var answers = correctAnswers(snapshot.val()) || {};
-        if (answers.correct || answers.wrong) self.ref.child('currentQuestion').update(correct);
+        var answers = correctAnswers(snapshot.val());
+        self.ref.child('currentQuestion').update(answers);
     });
     self.ref.child('currentQuestion').on('value', function (snapshot){
       if(snapshot.val()) self.selectedAnswer = snapshot.val().selectedAnswer;
@@ -155,7 +156,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     var correct = [], wrong = [];
     for (key in players) {
          if(players[key].answer && players[key].answer == self.currentQuestion.selectedAnswer){
-            answers.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
+            correct.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
          }
         else if(players[key].answer){
             wrong.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
@@ -163,7 +164,15 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     }
     return {answers:{correct:correct, wrong:wrong}};
   }
-
+  
+  function resetAnswers(players){
+    for (key in players) {
+         if(players[key].answer){
+            players[key].answer = {};
+         }
+    }
+    self.ref.child('players').update(players);
+  }
   function generateGameCode(){
   var finalCode = [],
       possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
