@@ -11,7 +11,13 @@ $red: #c61f1f;
 $green: #39b54a;
 $orange: #f68e56;
 $panicRed : #e11f1f;
-$outline: white;//#FFA500; /*E8079B*/
+$outline: rgba(245, 22, 62, 0.87);
+
+@mixin score-first-child{
+  background-color: $outline;
+  font-weight: bold;
+  padding-left: 5px;
+}
 
 /* Generate .color and .color-text for each color in the list */
 $colors: (
@@ -211,8 +217,16 @@ li{
             color: white;
           }
           margin-top: 10em;
-          background-color: #FFA500;
+          background-color: $outline;
           border: 2px solid $text-color;
+      }
+      &.play-again-mobile{
+        a{
+          color: white;
+        }
+        background-color: $outline;
+        border: 2px solid $text-color;
+        margin-top: 5em;
       }
     }
 }
@@ -264,24 +278,60 @@ h5{
 .timer-red{
   color: $panicRed;
 }
+
 .game-over{
-  display: flex;
-  .game-over-players{
-    width: 40%;
-    margin-left: 200px;
-    li:first-child{
-      font-weight: bold;
-      text-decoration: underline;
-    }
-  }
-  .game-over-points{
-    flex: 1;
-    li:first-child{
-      font-weight: bold;
-      text-decoration: underline;
+    width: 75%;
+    padding-left: 50px;
+    //padding-right: 50px;
+    margin: auto;
+    max-width: 960px;
+}
+
+.game-over-rank,
+.game-over-name,
+.game-over-score{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.game-over-rank{
+  float: left;
+  width: 30%;
+  margin: 2px;
+  li {
+    &:first-child {
+      @include score-first-child
     }
   }
 }
+.game-over-name{
+  float: left;
+  width: 30%;
+  margin: 2px;
+  li {
+    &:first-child {
+      @include score-first-child
+    }
+  }
+}
+.game-over-score{
+  float: left;
+  width: 30%;
+  margin: 2px;
+  li {
+    &:first-child {
+      @include score-first-child
+    }
+  }
+
+}
+.group:after{
+  content:"";
+  display: table;
+  clear: both;
+}
+
+
 .overlay{
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
