@@ -19,10 +19,6 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
         return user;
     }
 
-    this.setAnswer = function(answer){
-        this.ref.update({hasAnswered: answer});
-    }
-
     this.toggleReady = function(status){
         this.ready = status;
         this.ref.update({ready: status});

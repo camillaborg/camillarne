@@ -33,7 +33,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
 
         $scope.chooseAnswer = function (answer) {
             $scope.chosenAnswer = answer;
-            CurrentUser.chooseAnswer(answer);
+            if(Mobile) CurrentUser.chooseAnswer(answer);
         }
 
         $scope.setAnswer = function (answer){
