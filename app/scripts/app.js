@@ -21,22 +21,18 @@ function config($stateProvider, $urlRouterProvider){
         controller: "MainController"
         })
         .state('set-answer', {
-        url: "/set-answer",
         templateUrl: "../views/set-answer.html",
         controller: "GameController"
         })
         .state('guess-answer', {
-        url: "/guess-answer",
         templateUrl: "../views/guess-answer.html",
         controller: "GameController"
         })
         .state('display-answer', {
-        url: "/display-answer",
         templateUrl: "../views/display-answer.html",
         controller: "GameController"
         })
         .state('result', {
-        url: "/result",
         templateUrl: "../views/result.html",
         controller: "GameController"
         })
