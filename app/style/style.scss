@@ -33,7 +33,7 @@ $colors: (
   .#{nth($value, 1)}-text{color: nth($value, 2);}
 }
 
-$avatars: 'fish','bird','snail','cat';
+$avatars: 'fish' 'bird' 'snail' 'cat';
 
 @each $item in $avatars {
     .#{$item}{
