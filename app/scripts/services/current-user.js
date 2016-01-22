@@ -46,7 +46,7 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
     
     this.chooseAnswer = function(answer){
         self.answer = answer;
-        self.ref.update({anwer: answer});
+        self.ref.update({answer: answer});
     };
 
     this.ref = null;

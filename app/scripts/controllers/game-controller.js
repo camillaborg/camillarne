@@ -27,7 +27,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
                 $state.go('set-answer')
 
                 $timeout.cancel(time);
-            }, 3000);
+            }, 10000);
         }
 
 

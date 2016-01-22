@@ -110,11 +110,14 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   function startGame(){
     self.ref.on('value', function(snapshot){
        setGameParameters(snapshot.val());
-       correctAnswers(snapshot.val().players);
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
+    /*self.ref.child('players').on('value', function(snapshot){
+        var correct = correctAnswers(snapshot.val());
+        if (correct) self.ref.child('currentQuestion').set(correct);
+    });*/
     self.ref.child('currentQuestion').on('value', function (snapshot){
-      self.selectedAnswer = snapshot.val().selectedAnswer;
+      if(snapshot.val()) self.selectedAnswer = snapshot.val().selectedAnswer;
       if(self.selectedAnswer && $state.is('set-answer')) $state.go('guess-answer');
     });
     $state.go('set-answer');
@@ -142,14 +145,14 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
          order.push(players[key].id);
          ready.push(players[key].ready);
       }
-      if(ready.indexOf(false) === -1 && ready.length /*&& self.numOfPlayers > 1*/) play = true;
+      if(ready.indexOf(false) === -1 && ready.length && self.numOfPlayers > 1) play = true;
       return {numOfPlayers: size, inProgress: play, playerOrder: order};
   }
   
   function correctAnswers(players){
     var answers = [];
     for (key in players) {
-         if(players[key].answer == self.currentQuestion.selectedAnswer){
+         if(players[key].answer && players[key].answer == self.currentQuestion.selectedAnswer){
             answers.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
          }
     }
