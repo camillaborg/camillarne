@@ -79,13 +79,17 @@ a{
   text-decoration: none;
 }
 
-.main{ 
+.main{
     padding: 15px 0;
     @media(min-width:$tablet){padding: 50px 0;}}
 
 
 .players{
     margin-top:50px;
+}
+
+.not-ready{
+    opacity: 0.3;
 }
 
 .player{
@@ -104,7 +108,7 @@ a{
     background-repeat: no-repeat;
     background-size: 90%;
     background-position: center;
-    
+
     img{
         position: absolute;
         left: -10px;
@@ -242,7 +246,10 @@ li{
       width: 100%;
   }
 }
-
+.start{
+    width: 85%;
+    margin: 0 auto;
+}
 .ready-button{
   position: relative;
   display: inline-block;
@@ -253,7 +260,7 @@ li{
   border-radius: 50%;
   color: white;
   background: $red;
-  font-size: 3em;
+  font-size: 2.7em;
   font-weight: bold;
   border: 2px solid darken($red, 5);
   &:active, &.active{
