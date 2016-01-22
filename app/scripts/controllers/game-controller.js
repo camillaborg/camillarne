@@ -24,9 +24,8 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
         if($state.is('display-answer')) {
             var time = $timeout(function () {
                 Game.nextQuestion();
-                $state.go('guess-answer')
+                $state.go('set-answer')
 
-                console.log('visning slut!')
                 $timeout.cancel(time);
             }, 3000);
         }

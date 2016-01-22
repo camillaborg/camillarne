@@ -112,9 +112,9 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
        setGameParameters(snapshot.val());
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
-    self.ref.child('currentQuestion').on('child_added', function (snapshot){
+    self.ref.child('currentQuestion').on('value', function (snapshot){
       self.selectedAnswer = snapshot.val().selectedAnswer;
-      if(self.selectedAnswer) $state.go('guess-answer');
+      if(self.selectedAnswer && $state.is('set-answer')) $state.go('guess-answer');
     });
     $state.go('set-answer');
   }
