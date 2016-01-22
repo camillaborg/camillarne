@@ -1,6 +1,6 @@
 app.service('Game', Game);
 
-function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
+function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $state, $rootScope){
   var self = this,
       currentPlayerIndex = 0,
       currentQuestionIndex = 0;
@@ -110,6 +110,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
   function startGame(){
     self.ref.on('value', function(snapshot){
        setGameParameters(snapshot.val());
+       correctAnswers(snapshot.val().players);
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
     self.ref.child('currentQuestion').on('value', function (snapshot){
@@ -141,8 +142,18 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
          order.push(players[key].id);
          ready.push(players[key].ready);
       }
-      if(ready.indexOf(false) === -1 && ready.length && self.numOfPlayers > 1) play = true;
+      if(ready.indexOf(false) === -1 && ready.length /*&& self.numOfPlayers > 1*/) play = true;
       return {numOfPlayers: size, inProgress: play, playerOrder: order};
+  }
+  
+  function correctAnswers(players){
+    var answers = [];
+    for (key in players) {
+         if(players[key].answer == self.currentQuestion.selectedAnswer){
+            answers.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
+         }
+    }
+    return answers;
   }
 
   function generateGameCode(){
