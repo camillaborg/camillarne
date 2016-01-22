@@ -43,6 +43,11 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
           console.error("Authentication failed:", error);
         });
     }
+    
+    this.chooseAnswer = function(answer){
+        self.answer = answer;
+        self.ref.update({answer: answer});
+    };
 
     this.ref = null;
 }

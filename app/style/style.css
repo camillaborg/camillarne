@@ -189,9 +189,15 @@ li {
     font-size: 20px; }
     li button.play-again {
       margin-top: 10em;
-      background-color: #FFA500;
+      background-color: rgba(245, 22, 62, 0.87);
       border: 2px solid #383838; }
       li button.play-again a {
+        color: white; }
+    li button.play-again-mobile {
+      background-color: rgba(245, 22, 62, 0.87);
+      border: 2px solid #383838;
+      margin-top: 5em; }
+      li button.play-again-mobile a {
         color: white; }
 
 .mobile {
@@ -234,24 +240,55 @@ h4 {
 h5 {
   margin: 15px 15px;
   font-size: 3em;
-  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; }
+  text-shadow: -1px -1px 0 rgba(245, 22, 62, 0.87), 1px -1px 0 rgba(245, 22, 62, 0.87), -1px 1px 0 rgba(245, 22, 62, 0.87), 1px 1px 0 rgba(245, 22, 62, 0.87); }
 
 .timer-red {
   color: #e11f1f; }
 
 .game-over {
-  display: flex; }
-  .game-over .game-over-players {
-    width: 40%;
-    margin-left: 200px; }
-    .game-over .game-over-players li:first-child {
-      font-weight: bold;
-      text-decoration: underline; }
-  .game-over .game-over-points {
-    flex: 1; }
-    .game-over .game-over-points li:first-child {
-      font-weight: bold;
-      text-decoration: underline; }
+  width: 75%;
+  padding-left: 50px;
+  margin: auto;
+  max-width: 960px; }
+
+.game-over-rank,
+.game-over-name,
+.game-over-score {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center; }
+
+.game-over-rank {
+  float: left;
+  width: 30%;
+  margin: 2px; }
+  .game-over-rank li:first-child {
+    background-color: rgba(245, 22, 62, 0.87);
+    font-weight: bold;
+    padding-left: 5px; }
+
+.game-over-name {
+  float: left;
+  width: 30%;
+  margin: 2px; }
+  .game-over-name li:first-child {
+    background-color: rgba(245, 22, 62, 0.87);
+    font-weight: bold;
+    padding-left: 5px; }
+
+.game-over-score {
+  float: left;
+  width: 30%;
+  margin: 2px; }
+  .game-over-score li:first-child {
+    background-color: rgba(245, 22, 62, 0.87);
+    font-weight: bold;
+    padding-left: 5px; }
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both; }
 
 .overlay {
   background: rgba(0, 0, 0, 0.6);

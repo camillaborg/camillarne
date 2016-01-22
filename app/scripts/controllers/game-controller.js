@@ -27,16 +27,14 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
                 $state.go('set-answer')
 
                 $timeout.cancel(time);
-            }, 3000);
+            }, 10000);
         }
 
 
-            $scope.chooseAnswer = function (answer) {
-                $scope.chosenAnswer = answer;
-                //$scope.hasAnswered.push("Camilla");
-
-
-            }
+        $scope.chooseAnswer = function (answer) {
+            $scope.chosenAnswer = answer;
+            CurrentUser.chooseAnswer(answer);
+        }
 
         $scope.setAnswer = function (answer){
             Game.setCurrentQuestionAnswer(answer);          
