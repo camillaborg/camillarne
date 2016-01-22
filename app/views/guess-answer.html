@@ -16,7 +16,7 @@
    <div ng-if="user.id == game.currentPlayer.id">
     <h3><span ng-class="game.currentPlayer.color + '-text'">Your friends are guessing your answer!</h3>
   </div>
-  
+
    <div ng-if="user.id != game.currentPlayer.id">
         <h3 class="timer"></h3>
         <div class="circle" ng-class="game.currentPlayer.color"></div>
@@ -27,5 +27,4 @@
             </li>
         </ul>
   </div>
-
 </div>

@@ -69,7 +69,9 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   }
 
   this.nextQuestion = function(){
-    currentPlayerIndex = currentPlayerIndex == self.numOfPlayers ? 0 : currentPlayerIndex++;
+    //self.questions[currentQuestionIndex] = self.currentQuestion;
+    //self.ref.child('questions').update({self.currentQuestion});
+    currentPlayerIndex = currentPlayerIndex >= self.numOfPlayers ? 0 : currentPlayerIndex+1;
     currentQuestionIndex++;
 
     if(currentQuestionIndex == self.questions.length) endGame();
@@ -112,10 +114,10 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
        setGameParameters(snapshot.val());
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
-    /*self.ref.child('players').on('value', function(snapshot){
-        var correct = correctAnswers(snapshot.val());
-        if (correct) self.ref.child('currentQuestion').set(correct);
-    });*/
+    self.ref.child('players').on('value', function(snapshot){
+        var answers = correctAnswers(snapshot.val()) || {};
+        if (answers.correct || answers.wrong) self.ref.child('currentQuestion').update(correct);
+    });
     self.ref.child('currentQuestion').on('value', function (snapshot){
       if(snapshot.val()) self.selectedAnswer = snapshot.val().selectedAnswer;
       if(self.selectedAnswer && $state.is('set-answer')) $state.go('guess-answer');
@@ -150,13 +152,16 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   }
   
   function correctAnswers(players){
-    var answers = [];
+    var correct = [], wrong = [];
     for (key in players) {
          if(players[key].answer && players[key].answer == self.currentQuestion.selectedAnswer){
             answers.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
          }
+        else if(players[key].answer){
+            wrong.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
+        }
     }
-    return answers;
+    return {answers:{correct:correct, wrong:wrong}};
   }
 
   function generateGameCode(){

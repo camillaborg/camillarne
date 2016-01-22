@@ -310,6 +310,7 @@ h5 {
 
 .how-to-play {
   border: 13px solid #033D54;
+  border-radius: 35px;
   height: 20%;
   z-index: 200;
   width: 40%;
