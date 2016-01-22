@@ -39,5 +39,7 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
 
             }
 
-
+        $scope.setAnswer = function (answer){
+            Game.setCurrentQuestionAnswer(answer);          
         }
+}

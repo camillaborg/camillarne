@@ -15,7 +15,7 @@
     <h3><span ng-class="game.currentPlayer.color + '-text'">{{game.currentPlayer.name}}!</span> What's your {{game.currentQuestion.question}}</h3>
     <ul>
        <li ng-repeat="option in game.currentQuestion.options">
-           <button>{{option}}</button>
+           <button ng-click="setAnswer(option)">{{option}}</button>
        </li>
     </ul>
 </div>

@@ -38,7 +38,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
               self.inProgress = update.inProgress;
               self.playerOrder = update.playerOrder;
               self.players = snapshot.val().players;
-
+          
               self.ref.update(update);
               if(update.inProgress) {self.ref.off('value'); setupGame();}
               if(!$rootScope.$$phase) $rootScope.$apply();
@@ -80,6 +80,10 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
     self.ref.update({currentQuestion : self.currentQuestion});
   }
 
+  this.setCurrentQuestionAnswer = function(answer){
+    self.ref.child('currentQuestion').update({selectedAnswer: answer});
+  }
+  
   function setCurrentPlayer(id){
        self.ref.child('players').once('value', function(snapshot) {
           self.currentPlayer = snapshot.val()[id];
@@ -108,6 +112,10 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
        setGameParameters(snapshot.val());
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
+    self.ref.child('currentQuestion').on('child_added', function (snapshot){
+      self.selectedAnswer = snapshot.val().selectedAnswer;
+      if(self.selectedAnswer) $state.go('guess-answer');
+    });
     $state.go('set-answer');
   }
 
@@ -133,13 +141,13 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
          order.push(players[key].id);
          ready.push(players[key].ready);
       }
-      if(ready.indexOf(false) === -1 && ready.length /*&& self.numOfPlayers > 1*/) play = true;
+      if(ready.indexOf(false) === -1 && ready.length && self.numOfPlayers > 1) play = true;
       return {numOfPlayers: size, inProgress: play, playerOrder: order};
   }
 
   function generateGameCode(){
   var finalCode = [],
-      possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for(var i = 0; i < 6; i++){
     finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
   }
