@@ -36,8 +36,8 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
               var update = checkPlayers(snapshot.val().players);
               self.numOfPlayers = update.numOfPlayers;
               self.inProgress = update.inProgress;
+              self.playerOrder = update.playerOrder;
               self.players = snapshot.val().players;
-              self.playerOrder = snapshot.val().playerOrder;
 
               self.ref.update(update);
               if(update.inProgress) {self.ref.off('value'); setupGame();}
@@ -118,6 +118,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
   function setGameParameters(snapshotVal){
     self.inProgress = snapshotVal.inProgress;
     self.players = snapshotVal.players;
+    self.playerOrder = snapshotVal.playerOrder;
     self.numOfPlayers = snapshotVal.numOfPlayers;
     self.currentPlayer = snapshotVal.currentPlayer;
     self.questions = snapshotVal.questions;
@@ -125,14 +126,15 @@ function Game(UserState, FirebaseRef, $firebaseAuth, Error, $state, $rootScope){
   }
 
   function checkPlayers(players){
-      var size = 0, ready = [], play = false;
+      var size = 0, ready = [], play = false, order = [];
 
       for (key in players) {
          if (players.hasOwnProperty(key)) size++;
+         order.push(players[key].id);
          ready.push(players[key].ready);
       }
       if(ready.indexOf(false) === -1 && ready.length /*&& self.numOfPlayers > 1*/) play = true;
-      return {numOfPlayers: size, inProgress: play};
+      return {numOfPlayers: size, inProgress: play, playerOrder: order};
   }
 
   function generateGameCode(){

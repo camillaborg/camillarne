@@ -38,10 +38,6 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
             self.ref.onDisconnect().remove();
 
             UserState.state = 'registered';
-
-            Game.playerOrder = Game.playerOrder || [];
-            Game.playerOrder.push(authData.uid);
-            Game.ref.update({playerOrder: Game.playerOrder});
         })
          .catch(function(error) {
           console.error("Authentication failed:", error);

@@ -10,8 +10,8 @@
             </div>
             <div class="players row">
                 <div class="player" ng-repeat="player in game.players">
-                    <!--<div class="circle {{player.avatar}} {{player.color}}"><img ng-show="player.ready" src="images/check.png"></div>-->
-                    <div class="circle" ng-class="player.color"><img ng-show="player.ready" src="images/check.png"></div>
+                    <div class="circle {{player.avatar}} {{player.color}}"><img ng-show="player.ready" src="images/check.png"></div>
+                    <!--<div class="circle" ng-class="player.color"><img ng-show="player.ready" src="images/check.png"></div>-->
                     <p ng-class="player.color + '-text'">{{player.name}}</p>
                 </div>
             </div>
@@ -31,8 +31,8 @@
             <button ng-click="setUser(username)">Submit</button>
         </div>
         <div ng-switch-when="registered">
-            <!--<div class="circle {{user.avatar}} {{user.color}}"><img ng-show="user.ready" src="images/check.png"></div>-->
-            <div class="circle" ng-class="user.color"><img ng-show="user.ready" src="images/check.png"></div>
+            <div class="circle {{user.avatar}} {{user.color}}"><img ng-show="user.ready" src="images/check.png"></div>
+            <!--<div class="circle" ng-class="user.color"><img ng-show="user.ready" src="images/check.png"></div>-->
             <p>Welcome, <span ng-class="user.color + '-text'">{{user.name}}</span></p>
             <div class="ready-button" class="red" ng-class="{'active': user.ready}" ng-click="toggleReady()"><span>Ready</span></div>
         </div>
