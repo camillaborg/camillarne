@@ -1,11 +1,11 @@
 
 <div ng-if="!onMobile">
     <h3 class="timer"></h3>
-    <h4 ng-class="{'timer-red': count <= 3}">00:0{{count}}</h4>
+    <h4 ng-class="{'timer-red': game.time <= 3}">00:0{{game.time}}</h4>
     <h3>What's <span class="pink-text">{{game.currentPlayer.name}}'s</span> {{game.currentQuestion.question}}</h3>
     <ul>
         <li ng-repeat="option in game.currentQuestion.options">
-            <button ng-click="chooseAnswer(option)" ng-class="{'correct' : option == chosenAnswer, 'wrong' : (option != chosenAnswer) && (chosenAnswer != undefined)}">{{option}}</button>
+            <button ng-class="{'correct' : option == chosenAnswer, 'wrong' : (option != chosenAnswer) && (chosenAnswer != undefined)}">{{option}}</button>
         </li>
     </ul>
     <p><span ng-repeat="player in players" ng-if="game.player.hasAnswered">{{game.player.name}}{{$last ? '' : ', '}} </span> has answered.</p>

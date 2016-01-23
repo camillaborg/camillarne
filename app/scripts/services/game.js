@@ -1,6 +1,6 @@
 app.service('Game', Game);
 
-function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $state, $rootScope){
+function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $state, $rootScope, Mobile){
   var self = this,
       currentPlayerIndex = 0,
       currentQuestionIndex = 0;
@@ -10,6 +10,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   this.numOfPlayers = 0;
   this.id = '...';
   this.playerOrder = [];
+  this.time = 9;
 
   this.createNew = function(){
     var id = generateGameCode();
@@ -22,7 +23,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     function addToFirebase(id){
         self.id = id;
         self.ref = FirebaseRef.child('Games').child(id);
-        self.ref.set({numOfPlayers: self.numOfPlayers, inProgress: self.inProgress});
+        self.ref.set({numOfPlayers: self.numOfPlayers, inProgress: self.inProgress, time: self.time});
 
         $firebaseAuth(FirebaseRef).$authAnonymously().then(function(authData) {
               console.log("Logged in as:", authData.uid);
@@ -30,6 +31,8 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
             }, {remember: "sessionOnly"})
              .catch(function(error) {
               console.error("Authentication failed:", error);
+              Error.message = "Could not create game. Please refresh the page to try again.";
+              if(!$rootScope.$$phase) $rootScope.$apply();
         });
 
         self.ref.on('value', function(snapshot){
@@ -69,21 +72,36 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   }
 
   this.nextQuestion = function(){
-    //self.questions[currentQuestionIndex] = self.currentQuestion;
-    //self.ref.child('questions').update({self.currentQuestion});
-    currentPlayerIndex = currentPlayerIndex >= self.numOfPlayers ? 0 : currentPlayerIndex+1;
+    if(Mobile) return;
+    /*self.questions[currentQuestionIndex] = self.currentQuestion;
+    self.ref.update({questions: self.questions});*/
+    
+    resetTimer();
+    resetAnswers(self.players);
+    
+    currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
     currentQuestionIndex++;
 
-    if(currentQuestionIndex == self.questions.length) endGame();
-    
+    if(currentQuestionIndex == self.questions.length) { endGame(); return;}
     self.currentQuestion = self.questions[currentQuestionIndex];
     setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
-
-    self.ref.update({currentQuestion : self.currentQuestion});
+    
+    self.ref.update({currentQuestion: self.currentQuestion});
   }
 
   this.setCurrentQuestionAnswer = function(answer){
     self.ref.child('currentQuestion').update({selectedAnswer: answer});
+  }
+  
+  this.timerTick = function(end){
+    end = end || false;
+    self.time = end? 0 : self.time - 1;
+    self.ref.update({time: self.time});
+  }
+  
+  function resetTimer(){
+    self.time = 9;
+    self.ref.update({time: 9});    
   }
   
   function setCurrentPlayer(id){
@@ -112,11 +130,13 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   function startGame(){
     self.ref.on('value', function(snapshot){
        setGameParameters(snapshot.val());
+       if(self.time === 0 && $state.is('guess-answer')) $state.go('display-answer');
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
     self.ref.child('players').on('value', function(snapshot){
-        var answers = correctAnswers(snapshot.val()) || {};
-        if (answers.correct || answers.wrong) self.ref.child('currentQuestion').update(correct);
+        if(snapshot.val() === null) return;
+        var answers = correctAnswers(snapshot.val());
+        self.ref.child('currentQuestion').update(answers);
     });
     self.ref.child('currentQuestion').on('value', function (snapshot){
       if(snapshot.val()) self.selectedAnswer = snapshot.val().selectedAnswer;
@@ -137,6 +157,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     self.currentPlayer = snapshotVal.currentPlayer;
     self.questions = snapshotVal.questions;
     self.currentQuestion = snapshotVal.currentQuestion;
+    self.time = snapshotVal.time;
   }
 
   function checkPlayers(players){
@@ -155,23 +176,32 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     var correct = [], wrong = [];
     for (key in players) {
          if(players[key].answer && players[key].answer == self.currentQuestion.selectedAnswer){
-            answers.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
+            correct.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
          }
         else if(players[key].answer){
             wrong.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
         }
     }
-    return {answers:{correct:correct, wrong:wrong}};
+    return {answers:{correct:correct, wrong:wrong, total:(correct.length + wrong.length)}};
   }
-
+  
+  function resetAnswers(players){
+    for (key in players) {
+         if(players[key].answer){
+            players[key].answer = {};
+         }
+    }
+    self.ref.child('players').update(players);
+  }
+  
   function generateGameCode(){
-  var finalCode = [],
-      possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for(var i = 0; i < 6; i++){
-    finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
+      var finalCode = [],
+          possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for(var i = 0; i < 6; i++){
+        finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
+      }
+      return finalCode.join('');
   }
-  return finalCode.join('');
-}
 
   function shuffleArray(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
