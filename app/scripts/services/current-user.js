@@ -6,7 +6,7 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth, Error, $rootSc
         avatars = ['fish', 'cat', 'bird', 'snail'],
         color = colors[Math.floor(Math.random() * colors.length)],
         avatar = avatars[Math.floor(Math.random() * avatars.length)];
-  
+
 
     function setDetails(name, id){
         var user = {};
@@ -23,7 +23,7 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth, Error, $rootSc
         this.ready = status;
         this.ref.update({ready: status});
     }
-    
+
     this.setUser = function(name){
         $firebaseAuth(FirebaseRef).$authAnonymously().then(function(authData) {
             var user = setDetails(name, authData.uid);
@@ -41,12 +41,12 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth, Error, $rootSc
           if(!$rootScope.$$phase) $rootScope.$apply();
         });
     }
-    
+
     this.chooseAnswer = function(answer){
         self.answer = answer;
         self.ref.update({answer: answer});
     };
-    
+
     this.addScore = function(points){
         self.score += points;
         self.ref.update({score: self.score});
