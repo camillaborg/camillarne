@@ -72,21 +72,24 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   }
 
   this.nextQuestion = function(){
-    if(Mobile) return;
+    if(!Mobile){
     /*self.questions[currentQuestionIndex] = self.currentQuestion;
     self.ref.update({questions: self.questions});*/
     
-    resetTimer();
-    resetAnswers(self.players);
-    
-    currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
-    currentQuestionIndex++;
+      resetTimer();
+      resetAnswers(self.players);
 
-    if(currentQuestionIndex == self.questions.length) { endGame(); return;}
-    self.currentQuestion = self.questions[currentQuestionIndex];
-    setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
+      currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
+      currentQuestionIndex++;
+
+      if(currentQuestionIndex == self.questions.length) { endGame(); return;}
+      self.currentQuestion = self.questions[currentQuestionIndex];
+      setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
+
+      self.ref.update({currentQuestion: self.currentQuestion});
+    }
     
-    self.ref.update({currentQuestion: self.currentQuestion});
+    $state.go('set-answer');
   }
 
   this.setCurrentQuestionAnswer = function(answer){

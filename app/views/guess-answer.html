@@ -20,7 +20,7 @@
    <div ng-if="user.id != game.currentPlayer.id">
         <h3 class="timer"></h3>
         <div class="circle" ng-class="game.currentPlayer.color"></div>
-        <h3>What's <span class="pink-text">{{game.currentPlayer.name}}'s</span>{{game.currentQuestion.question}}</h3>
+        <h3>What's <span class="{{game.currentPlayer.color}}-text">{{game.currentPlayer.name}}'s</span>{{game.currentQuestion.question}}</h3>
         <ul>
             <li ng-repeat="option in game.currentQuestion.options">
                 <button ng-click="chooseAnswer(option)" ng-class="{'correct' : option == chosenAnswer, 'wrong' : (option != chosenAnswer) && (chosenAnswer != undefined)}">{{option}}</button>
