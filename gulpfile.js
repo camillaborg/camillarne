@@ -25,3 +25,8 @@ gulp.task('serve', function(){
 
     gulp.watch("app/scripts/**/*.js").on('change', browserSync.reload);
 });
+
+
+gulp.task('dist', function(){
+    
+});

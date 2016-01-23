@@ -100,12 +100,8 @@ a {
   margin: 0 12px;
   position: relative;
   background-repeat: no-repeat;
-  background-size: 90%;
-  background-position: center; }
-  .circle img {
-    position: absolute;
-    left: -10px;
-    top: -14px; }
+  background-size: 80% 80%;
+  background-position: center center; }
 
 .small-circle {
   width: 30px;

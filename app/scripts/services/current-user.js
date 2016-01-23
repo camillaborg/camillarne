@@ -1,9 +1,9 @@
 app.service('CurrentUser', CurrentUser);
 
-function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
+function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth, Error, $rootScope){
     var self = this,
         colors = ['pink', 'green', 'blue', 'red', 'orange'],
-        avatars = ['fish', 'snail', 'bird', 'cat'],
+        avatars = ['fish', 'cat', 'bird', 'snail'],
         color = colors[Math.floor(Math.random() * colors.length)],
         avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
@@ -37,6 +37,8 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
         })
          .catch(function(error) {
           console.error("Authentication failed:", error);
+          Error.message = "Could not register user. Please try again.";
+          if(!$rootScope.$$phase) $rootScope.$apply();
         });
     }
 
@@ -44,6 +46,11 @@ function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
         self.answer = answer;
         self.ref.update({answer: answer});
     };
+
+    this.addScore = function(points){
+        self.score += points;
+        self.ref.update({score: self.score});
+    }
 
     this.ref = null;
 }

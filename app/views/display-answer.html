@@ -19,21 +19,21 @@
 <div ng-if="onMobile" class="mobile">
   <div ng-if="user.id == game.currentPlayer.id && game.currentQuestion.answers.correct">
         <p>{{game.currentQuestion.answers.correct.length}} people answered correctly. You get 1 point!</p>
+        <p>Your current score is {{user.score}}.</p>
   </div>
-  <div ng-if="user.id == game.currentPlayer.id && !game.currentQuestion.correct">
+  <div ng-if="user.id == game.currentPlayer.id && game.currentQuestion.answers.correct.length == 0">
         <p>Not a single person answered correctly! No points for you.</p>
+        <p>Your current score is {{user.score}}.</p>
   </div>
 
    <div ng-if="user.id != game.currentPlayer.id">
        <div ng-if="user.answer == game.currentQuestion.selectedAnswer">
-        Correct: {{game.currentQuestion.selectedAnswer}}<br>
-        Your: {{user.answer}}
-         <p>Correct! You earned 1 point. Your current score is {{user.score}}.</p>
+         <p>Correct! You earned 1 point.</p>
+         <p>Your current score is {{user.score}}.</p>
        </div>
        <div ng-if="user.answer != game.currentQuestion.selectedAnswer">
-        Correct: {{game.currentQuestion.selectedAnswer}}<br>
-        Your: {{user.answer}}
-         <p>Wrong! No points this round. Your current score is {{user.score}}.</p>
+         <p>Wrong! No points this round.</p>
+         <p>Your current score is {{user.score}}.</p>
        </div>
   </div>
 
