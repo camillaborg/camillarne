@@ -33,7 +33,7 @@
         <div ng-switch-when="registered" class="start">
             <div class="circle {{user.avatar}} {{user.color}}" ng-class="{'not-ready' : !user.ready}"></div>
             <p>Welcome, <span ng-class="user.color + '-text'">{{user.name}}</span></p>
-            <div class="ready-button" class="red" ng-class="{'active': user.ready" ng-click="toggleReady()"><span>Ready</span></div>
+            <div class="ready-button" class="red" ng-class="{'active': user.ready}" ng-click="toggleReady()"><span>Ready</span></div>
         </div>
         <p class="red-text">{{validationError.message}}</p>
     </div>

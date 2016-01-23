@@ -22,15 +22,15 @@ function config($stateProvider, $urlRouterProvider){
         })
         .state('set-answer', {
         templateUrl: "../views/set-answer.html",
-        controller: "GameController"
+        controller: 'GameController'
         })
         .state('guess-answer', {
         templateUrl: "../views/guess-answer.html",
-        controller: "GameController"
+        controller: 'GameController'
         })
         .state('display-answer', {
         templateUrl: "../views/display-answer.html",
-        controller: "GameController"
+        controller: 'GameController'
         })
         .state('result', {
         templateUrl: "../views/result.html",

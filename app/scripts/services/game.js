@@ -72,7 +72,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   }
 
   this.nextQuestion = function(){
-    if(!Mobile){
+    if(Mobile) return;
     /*self.questions[currentQuestionIndex] = self.currentQuestion;
     self.ref.update({questions: self.questions});*/
     
@@ -87,9 +87,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
       setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
 
       self.ref.update({currentQuestion: self.currentQuestion});
-    }
     
-    $state.go('set-answer');
   }
 
   this.setCurrentQuestionAnswer = function(answer){

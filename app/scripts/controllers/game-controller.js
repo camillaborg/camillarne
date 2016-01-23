@@ -25,13 +25,13 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
             if(CurrentUser.answer === Game.currentQuestion.selectedAnswer && CurrentUser.id !== Game.currentPlayer.id){
                 CurrentUser.addScore(1);
             }
-            else if(CurrentUser.id === Game.currentPlayer.id && Game.currentQuestion.answers.correct.length){
+            else if(CurrentUser.id === Game.currentPlayer.id && Game.currentQuestion.answers.correct){
                 CurrentUser.addScore(1);
             }
             
             var time = $timeout(function () {
                 Game.nextQuestion();
-
+                $state.go('set-answer');
                 $timeout.cancel(time);
             }, 10000);
         }
