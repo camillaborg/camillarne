@@ -3,7 +3,7 @@ app.service('CurrentUser', CurrentUser);
 function CurrentUser(UserState, Game, FirebaseRef, $firebaseAuth){
     var self = this,
         colors = ['pink', 'green', 'blue', 'red', 'orange'],
-        avatars = ['fish'],
+        avatars = ['fish', 'snail', 'bird', 'cat'],
         color = colors[Math.floor(Math.random() * colors.length)],
         avatar = avatars[Math.floor(Math.random() * avatars.length)];
   
