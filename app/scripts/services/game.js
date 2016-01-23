@@ -72,21 +72,21 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   }
 
   this.nextQuestion = function(){
-    //self.questions[currentQuestionIndex] = self.currentQuestion;
-    //self.ref.child('questions').update({self.currentQuestion});
-    if(!Mobile) return;
+    if(Mobile) return;
+    /*self.questions[currentQuestionIndex] = self.currentQuestion;
+    self.ref.update({questions: self.questions});*/
+    
     resetTimer();
+    resetAnswers(self.players);
+    
     currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
     currentQuestionIndex++;
 
-    if(currentQuestionIndex == self.questions.length) endGame();
-    console.log(self.questions[currentQuestionIndex]);
+    if(currentQuestionIndex == self.questions.length) { endGame(); return;}
     self.currentQuestion = self.questions[currentQuestionIndex];
-    console.log(self.currentQuestion);
     setCurrentPlayer(self.playerOrder[currentPlayerIndex]);
     
-    resetAnswers(self.players);
-    self.ref.update({currentQuestion : self.currentQuestion});
+    self.ref.update({currentQuestion: self.currentQuestion});
   }
 
   this.setCurrentQuestionAnswer = function(answer){
@@ -134,6 +134,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
     self.ref.child('players').on('value', function(snapshot){
+        if(snapshot.val() === null) return;
         var answers = correctAnswers(snapshot.val());
         self.ref.child('currentQuestion').update(answers);
     });

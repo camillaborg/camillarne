@@ -21,7 +21,7 @@
         <p>{{game.currentQuestion.answers.correct.length}} people answered correctly. You get 1 point!</p>
         <p>Your current score is {{user.score}}.</p>
   </div>
-  <div ng-if="user.id == game.currentPlayer.id && !game.currentQuestion.answers.correct.length">
+  <div ng-if="user.id == game.currentPlayer.id && game.currentQuestion.answers.correct.length == 0">
         <p>Not a single person answered correctly! No points for you.</p>
         <p>Your current score is {{user.score}}.</p>
   </div>
