@@ -10,6 +10,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   this.numOfPlayers = 0;
   this.id = '...';
   this.playerOrder = [];
+  this.time = 9;
 
   this.createNew = function(){
     var id = generateGameCode();
@@ -22,7 +23,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     function addToFirebase(id){
         self.id = id;
         self.ref = FirebaseRef.child('Games').child(id);
-        self.ref.set({numOfPlayers: self.numOfPlayers, inProgress: self.inProgress});
+        self.ref.set({numOfPlayers: self.numOfPlayers, inProgress: self.inProgress, time: self.time});
 
         $firebaseAuth(FirebaseRef).$authAnonymously().then(function(authData) {
               console.log("Logged in as:", authData.uid);
@@ -30,6 +31,8 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
             }, {remember: "sessionOnly"})
              .catch(function(error) {
               console.error("Authentication failed:", error);
+              Error.message = "Could not create game. Please refresh the page to try again.";
+              if(!$rootScope.$$phase) $rootScope.$apply();
         });
 
         self.ref.on('value', function(snapshot){
@@ -72,6 +75,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     //self.questions[currentQuestionIndex] = self.currentQuestion;
     //self.ref.child('questions').update({self.currentQuestion});
     if(!Mobile) return;
+    resetTimer();
     currentPlayerIndex = currentPlayerIndex == (self.numOfPlayers - 1) ? 0 : currentPlayerIndex + 1;
     currentQuestionIndex++;
 
@@ -87,6 +91,17 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
 
   this.setCurrentQuestionAnswer = function(answer){
     self.ref.child('currentQuestion').update({selectedAnswer: answer});
+  }
+  
+  this.timerTick = function(end){
+    end = end || false;
+    self.time = end? 0 : self.time - 1;
+    self.ref.update({time: self.time});
+  }
+  
+  function resetTimer(){
+    self.time = 9;
+    self.ref.update({time: 9});    
   }
   
   function setCurrentPlayer(id){
@@ -115,6 +130,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
   function startGame(){
     self.ref.on('value', function(snapshot){
        setGameParameters(snapshot.val());
+       if(self.time === 0 && $state.is('guess-answer')) $state.go('display-answer');
        if(!$rootScope.$$phase) $rootScope.$apply();
     });
     self.ref.child('players').on('value', function(snapshot){
@@ -140,6 +156,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     self.currentPlayer = snapshotVal.currentPlayer;
     self.questions = snapshotVal.questions;
     self.currentQuestion = snapshotVal.currentQuestion;
+    self.time = snapshotVal.time;
   }
 
   function checkPlayers(players){
@@ -164,7 +181,7 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
             wrong.push({answer: players[key].answer, name: players[key].name, color: players[key].color, avatar: players[key].avatar});
         }
     }
-    return {answers:{correct:correct, wrong:wrong}};
+    return {answers:{correct:correct, wrong:wrong, total:(correct.length + wrong.length)}};
   }
   
   function resetAnswers(players){
@@ -175,14 +192,15 @@ function Game(UserState, FirebaseRef, $firebaseAuth, $firebaseArray, Error, $sta
     }
     self.ref.child('players').update(players);
   }
+  
   function generateGameCode(){
-  var finalCode = [],
-      possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for(var i = 0; i < 6; i++){
-    finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
+      var finalCode = [],
+          possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for(var i = 0; i < 6; i++){
+        finalCode.push(possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length)));
+      }
+      return finalCode.join('');
   }
-  return finalCode.join('');
-}
 
   function shuffleArray(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
