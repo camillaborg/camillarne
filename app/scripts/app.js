@@ -17,23 +17,23 @@ function config($stateProvider, $urlRouterProvider){
     $stateProvider
         .state('main', {
         url: "",
-        templateUrl: "../views/main.html",
+        templateUrl: "./views/main.html",
         controller: "MainController"
         })
         .state('set-answer', {
-        templateUrl: "../views/set-answer.html",
+        templateUrl: "./views/set-answer.html",
         controller: 'GameController'
         })
         .state('guess-answer', {
-        templateUrl: "../views/guess-answer.html",
+        templateUrl: "./views/guess-answer.html",
         controller: 'GameController'
         })
         .state('display-answer', {
-        templateUrl: "../views/display-answer.html",
+        templateUrl: "./views/display-answer.html",
         controller: 'GameController'
         })
         .state('result', {
-        templateUrl: "../views/result.html",
+        templateUrl: "./views/result.html",
         controller: "GameController"
         })
 }
