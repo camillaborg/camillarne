@@ -28,11 +28,14 @@ function GameController($scope, $interval, Mobile, $state, $timeout, Game, Curre
             else if(CurrentUser.id === Game.currentPlayer.id && Game.currentQuestion.answers.correct){
                 CurrentUser.addScore(1);
             }
-            
-            var time = $timeout(function () {
-                Game.nextQuestion();
+
+           var time = $timeout(function () {
+               if(!Mobile) {
+                   Game.nextQuestion();
+               }
                 $state.go('set-answer');
                 $timeout.cancel(time);
+              
             }, 10000);
         }
 
